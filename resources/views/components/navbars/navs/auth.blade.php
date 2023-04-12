@@ -1,20 +1,92 @@
 @props(['titlePage'])
+<style>
+    *, *:before, *:after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    :root {
+        minFontSize + (maxFontSize - minFontSize) * (100vw - minVWidth)/(maxVWidth - minVWidth)
+    }
+    .l {
+        background-color: rgba(0,0,0,0.7);
+        border-radius: 0.75em;
+        box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
+        color: #fdea7b;
+        display: inline-flex;
+        align-items: center;
+        margin: auto;
+        padding: 0.15em;
+        width: 3em;
+        height: 1.5em;
+        transition: background-color 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .l:before, .l:after {
+        content: "";
+        display: block;
+    }
+    .l:before {
+        background-color: #d7d7d7;
+        border-radius: 50%;
+        width: 1.2em;
+        height: 1.2em;
+        transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+        z-index: 1;
+    }
+    .l:after {
+        background:
+            linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
+            repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
+            radial-gradient(circle at 50% 50%,#888 25%, transparent 26%);
+        background-repeat: no-repeat;
+        border: 0.25em solid transparent;
+        border-left: 0.4em solid #d8d8d8;
+        border-right: 0 solid transparent;
+        transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+        transform: translateX(-22.5%);
+        transform-origin: 25% 50%;
+        width: 1.2em;
+        height: 1em;
+    }
+    /* Checked */
+    .l:checked {
+        background-color: rgba(0,0,0,0.45);
+        box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
+    }
+    .l:checked:before {
+        background-color: currentColor;
+        transform: translateX(125%)
+    }
+    .l:checked:after {
+        border-left-color: currentColor;
+        transform: translateX(-2.5%) rotateY(180deg);
+    }
+    /* Other States */
+    .l:focus {
+        /* Usually an anti-A11Y practice but set to remove an annoyance just for this demo */
+        outline: 0;
+    }    
+</style>
 
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
     navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Página</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $titlePage }}</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">{{ $titlePage }}</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group input-group-outline">
-                    <label class="form-label">Type here...</label>
-                    <input type="text" class="form-control">
+                <div class="mt-2 d-flex">
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="l" type="checkbox" checked onclick="darkMode(this)">
+                    </div>
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
@@ -25,8 +97,8 @@
                     <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                         <i class="fa fa-user me-sm-1"></i>
                         <span class="d-sm-inline d-none"
-                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign
-                            Out</span>
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            Sair</span>
                     </a>
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -37,94 +109,6 @@
                             <i class="sidenav-toggler-line"></i>
                         </div>
                     </a>
-                </li>
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0">
-                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bell cursor-pointer"></i>
-                    </a>
-                    <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
-                        aria-labelledby="dropdownMenuButton">
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('assets') }}/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New message</span> from Laur
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            13 minutes ago
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('assets') }}/img/small-logos/logo-spotify.svg"
-                                            class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New album</span> by Travis Scott
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            1 day
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <title>credit-card</title>
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
-                                                    fill-rule="nonzero">
-                                                    <g transform="translate(1716.000000, 291.000000)">
-                                                        <g transform="translate(453.000000, 454.000000)">
-                                                            <path class="color-background"
-                                                                d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                                opacity="0.593633743"></path>
-                                                            <path class="color-background"
-                                                                d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                                            </path>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            Payment successfully completed
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            2 days
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </div>

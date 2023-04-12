@@ -22,14 +22,12 @@
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
                     href="{{ route('user-profile') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <span class="material-symbols-rounded">speaker_group</span>
+                        <span class="material-icons">speaker_group</span>
 
-                        {{-- <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i> --}}
                     </div>
                     <span class="nav-link-text ms-1">User Profile</span>
                 </a>
             </li>
-
 
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "

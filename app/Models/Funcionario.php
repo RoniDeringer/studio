@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Funcionario extends Model
 {
     use HasFactory;
 

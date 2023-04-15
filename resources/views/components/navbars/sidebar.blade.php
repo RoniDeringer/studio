@@ -19,8 +19,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
-                    href="{{ route('user-profile') }}">
+                <a class="nav-link text-white {{ $activePage == 'atendimentos' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('atendimentos') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <span class="material-icons">receipt_long</span>
 
@@ -29,8 +29,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
-                    href="{{ route('user-profile') }}">
+                <a class="nav-link text-white {{ $activePage == 'clientes' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('clientes') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <span class="material-icons">groups</span>
 

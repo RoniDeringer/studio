@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AtendimentoController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,20 @@ Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest'
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
 Route::post('reset-password', [SessionsController::class, 'update'])->middleware('guest')->name('password.update');
+
+
+Route::get('atendimentos', [AtendimentoController::class, 'index'])->middleware('auth')->name('atendimentos');
+
+Route::get('clientes',[ClienteController::class, 'index'])->middleware('auth')->name('clientes');
+
+
+
+
+
+
+
+
+
 Route::get('verify', function () {
 	return view('sessions.password.verify');
 })->middleware('guest')->name('verify'); 

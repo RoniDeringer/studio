@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- Navbar -->
-                <x-navbars.navs.guest signin='login' signup='register'></x-navbars.navs.guest>
+                {{-- <x-navbars.navs.guest signin='login' signup='register'></x-navbars.navs.guest> --}}
                 <!-- End Navbar -->
             </div>
         </div>
@@ -19,12 +19,12 @@
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Reset password</h4>
-                                    <p class='text-light p-2'>You will receive an e-mail in maximum 60 seconds</p>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Recuperação de senha</h4>
+                                    <p class='text-light p-2'>Ainda não foi implementando, entre em contato com o desenvolvedor</p>
                                 </div>
                             </div>
                             <div class="card-body">
-                                @if (Session::has('status'))
+                                {{-- @if (Session::has('status'))
                                 <div class="alert alert-success alert-dismissible text-white" role="alert">
                                     <span class="text-sm">{{ Session::get('status') }}</span>
                                     <button type="button" class="btn-close text-lg py-3 opacity-10"
@@ -71,7 +71,10 @@
                                         <a href="{{ route('register') }}"
                                             class="text-primary text-gradient font-weight-bold">Sign up</a>
                                     </p>
-                                </form>
+                                </form> --}}
+                                <a href="{{ route('login') }}">
+                                <button type="button"
+                                class="btn bg-gradient-primary w-100 my-4 mb-2">Voltar</button></a>
                             </div>
                         </div>
                     </div>

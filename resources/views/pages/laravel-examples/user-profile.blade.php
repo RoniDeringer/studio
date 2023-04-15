@@ -100,9 +100,9 @@
                                 </div>
                                 
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" name="name" class="form-control border border-2 p-2" value='{{ old('name', auth()->user()->name) }}'>
-                                    @error('name')
+                                    <label class="form-label">Nome</label>
+                                    <input type="text" name="nome" class="form-control border border-2 p-2" value='{{ old('nome', auth()->user()->nome) }}'>
+                                    @error('nome')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                                 </div>

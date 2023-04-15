@@ -32,11 +32,11 @@
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
                                             <div class="input-group input-group-outline mt-3">
-                                                <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    value="{{ old('name') }}">
+                                                <label class="form-label">Nome</label>
+                                                <input type="text" class="form-control" name="nome"
+                                                    value="{{ old('nome') }}">
                                             </div>
-                                            @error('name')
+                                            @error('nome')
                                             <p class='text-danger inputerror'>{{ $message }} </p>
                                             @enderror
                                             <div class="input-group input-group-outline mt-3">

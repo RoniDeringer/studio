@@ -9,7 +9,6 @@
     }
 </style>
 @endsection
-
 @section('content')
     <div class="row">
         <div class="col">
@@ -36,11 +35,6 @@
                                     </a>
                                 </div>
                             </div>
-                            
-                            
-
-
-
 
                         </div>
                     </div>
@@ -71,6 +65,23 @@
                                                                     </div>
                                                                     {{-- <a href="{{route('admin-projetos-ver', $atendimento)}}" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal"> --}}
                                                                     <a href="#" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal">
+                                                                        <div class="col-md-2 text-dark">
+                                                                            <h6 class="text-xs mb-1 opacity-8">Data</h6>
+                                                                            <h5 class="text-md text-bold opacity-9">
+                                                                                {{ date('d/m/Y', strtotime($atendimento->data_atendimento)) }}
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="col-md-4 text-dark">
+                                                                            <h6 class="text-xs mb-1 opacity-8">Serviço</h6>
+                                                                            <h5 class="text-md text-bold opacity-9">{{ $atendimento->servico}}</h5>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-3 text-dark">
+                                                                            <h6 class="text-xs mb-1 opacity-8">Valor</h6>
+                                                                            <h5 class="text-md text-bold  opacity-9">
+                                                                                R$ {{ number_format($atendimento->valor, 2, ',', '.') }}
+                                                                            </h5>
+                                                                        </div>
                                                                         <div class="col-md-3 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-8">
                                                                                 @if($atendimento->nome_func)
@@ -85,22 +96,6 @@
                                                                                 @else
                                                                                     {{$atendimento->nome_terc}}
                                                                                 @endif
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-md-4 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">Serviço</h6>
-                                                                            <h5 class="text-md text-bold opacity-9">{{ $atendimento->servico}}</h5>
-                                                                        </div>
-                                                                        <div class="col-md-2 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">Data</h6>
-                                                                            <h5 class="text-md text-bold opacity-9">
-                                                                                {{ date('d/m/Y', strtotime($atendimento->data_atendimento)) }}
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-md-3 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">Valor</h6>
-                                                                            <h5 class="text-md text-bold  opacity-9">
-                                                                                R$ {{ number_format($atendimento->valor, 2, ',', '.') }}
                                                                             </h5>
                                                                         </div>
                                                                     </a>

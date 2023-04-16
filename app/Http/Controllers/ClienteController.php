@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
     public function index()
     {
-        return view('pages.clientes');
+
+        $clientes = Cliente::select("*")
+            ->join('users', 'users.id', 'cliente.id_user')
+            ->get();
+        return view('pages.clientes', ['clientes' => $clientes]);
     }
 
     public function update()

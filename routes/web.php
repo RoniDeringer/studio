@@ -36,6 +36,7 @@ Route::post('reset-password', [SessionsController::class, 'update'])->middleware
 
 
 Route::get('atendimentos', [AtendimentoController::class, 'index'])->middleware('auth')->name('atendimentos');
+Route::get('atendimentos/{user}', [AtendimentoController::class, 'viewCliente'])->name('atendimentos-cliente');
 
 Route::get('clientes',[ClienteController::class, 'index'])->middleware('auth')->name('clientes');
 

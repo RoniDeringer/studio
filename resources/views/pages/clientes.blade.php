@@ -48,6 +48,7 @@
                                         <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Aniversário</th>
                                         <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Total gasto</th>
                                         <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Nº Atendimentos</th>
+                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,6 +69,19 @@
                                                 @endif
                                             </td>
                                             <td class="py-3">5</td>
+                                            <td class="text-sm">
+                                                <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                                    <i class="material-icons text-secondary position-relative text-lg">visibility</i>
+                                                </a>
+                                                <a href="{{route('editar-cliente',$cliente->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                                                    <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
+                                                </a>
+                                                <a href="{{route('cliente-destroy',$cliente->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                                    <i class="material-icons text-secondary position-relative text-lg">delete</i> 
+                                                    tem ctz? sweet
+                                                </a>
+                                            </td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -85,6 +99,8 @@
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('js/theme/plugins/datatables.min.js')}}"></script>
+<script src="{{asset('js/theme/plugins/bootstrap.min.js')}}"></script>
 
 <script>
     $(document).ready(function() {

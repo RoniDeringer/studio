@@ -41,6 +41,9 @@ Route::get('atendimentos/{user}', [AtendimentoController::class, 'viewCliente'])
 Route::get('clientes',[ClienteController::class, 'index'])->middleware('auth')->name('clientes');
 Route::get('clientes/adicionar',[ClienteController::class, 'addCliente'])->middleware('auth')->name('add-cliente');
 Route::post('clientes/adicionar',[ClienteController::class, 'store'])->middleware('auth')->name('cliente-store');
+Route::get('clientes/{cliente}/excluir',[ClienteController::class, 'destroy'])->middleware('auth')->name('cliente-destroy');
+Route::get('clientes/{cliente}/edit',[ClienteController::class, 'edit'])->middleware('auth')->name('editar-cliente');
+Route::post('clientes/{cliente}/edit',[ClienteController::class, 'update'])->middleware('auth')->name('cliente-edit');
 
 
 

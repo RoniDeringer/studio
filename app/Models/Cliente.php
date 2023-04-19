@@ -20,7 +20,8 @@ class Cliente extends Model
     protected $fillable = [
         'id_user',
         'ativo',
-        'observacao'
+        'observacao',
+        'ultimo_atendimento'
     ];
 
     public function user()

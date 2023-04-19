@@ -23,6 +23,13 @@
                     <div class="col-md-6">
                         <h5 class="mb-0">Clientes</h5>
                     </div>
+                    <div class="col-md-5">
+                        <div class="d-flex justify-content-end">
+                            <a href="{{route('add-cliente')}}"
+                                class="mr-3 justify-content-end btn bg-gradient-primary btn-sm mb-0">+&nbsp; Cliente
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

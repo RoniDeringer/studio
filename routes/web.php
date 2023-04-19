@@ -39,6 +39,8 @@ Route::get('atendimentos', [AtendimentoController::class, 'index'])->middleware(
 Route::get('atendimentos/{user}', [AtendimentoController::class, 'viewCliente'])->name('atendimentos-cliente');
 
 Route::get('clientes',[ClienteController::class, 'index'])->middleware('auth')->name('clientes');
+Route::get('clientes/adicionar',[ClienteController::class, 'addCliente'])->middleware('auth')->name('add-cliente');
+Route::post('clientes/adicionar',[ClienteController::class, 'store'])->middleware('auth')->name('cliente-store');
 
 
 

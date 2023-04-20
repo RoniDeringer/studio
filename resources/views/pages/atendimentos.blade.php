@@ -25,8 +25,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex justify-content-end">
-                                    <a href="https://material-dashboard-pro-laravel.creative-tim.com/new-product"
-                                        class="mr-3 justify-content-end btn bg-gradient-primary btn-sm mb-0" target="_blank">+&nbsp; Atendimento
+                                    <a href="{{route('add-atendimento')}}"
+                                        class="mr-3 justify-content-end btn bg-gradient-primary btn-sm mb-0">+&nbsp; Atendimento
                                     </a>
                                     <a href="#" style="padding-left:5px">
                                         <button class="justify-content-end btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button"
@@ -71,7 +71,7 @@
                                                                                 {{ date('d/m/Y', strtotime($atendimento->data_atendimento)) }}
                                                                             </h5>
                                                                         </div>
-                                                                        <div class="col-md-4 text-dark">
+                                                                        <div class="col-md-3 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-8">Serviço</h6>
                                                                             <h5 class="text-md text-bold opacity-9">{{ $atendimento->servico}}</h5>
                                                                         </div>

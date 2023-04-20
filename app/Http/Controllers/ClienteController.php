@@ -64,8 +64,8 @@ class ClienteController extends Controller
             $cliente = Cliente::find($id_cliente);
             $user = User::where('id', $cliente->id_user)->first();
             if ($cliente && $user) {
-                $cliente->delete();
-                $user->delete();
+                // $cliente->delete();
+                // $user->delete();
                 return redirect()->back()->with(['type' => 'alert-success', 'message' => 'Cliente excluído com sucesso.']);
             }
             Log::error('Erro ao excluir cliente! Cliente ou User não encontrado.');

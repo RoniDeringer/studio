@@ -2,6 +2,7 @@
 @php session()->put('activePage', 'clientes'); @endphp
 @section('style')
 <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css" integrity="sha256-2bAj1LMT7CXUYUwuEnqqooPb1W0Sw0uKMsqNH0HwMa4=" crossorigin="anonymous" />
 
 <style>
     td button.btn-icon{
@@ -76,9 +77,8 @@
                                                 <a href="{{route('editar-cliente',$cliente->id_cliente)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                                     <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
                                                 </a>
-                                                <a href="{{route('cliente-destroy',$cliente->id_cliente)}}" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                                <a href="#" onclick="modalDelete({{$cliente->id_cliente}})" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                                                     <i class="material-icons text-secondary position-relative text-lg">delete</i> 
-                                                    tem ctz? sweet
                                                 </a>
                                             </td>
                                             
@@ -100,7 +100,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('js/theme/plugins/datatables.min.js')}}"></script>
-<script src="{{asset('js/theme/plugins/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/theme/core/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/theme/plugins/sweetalert.min.js')}}"></script>
 
 <script>
     $(document).ready(function() {
@@ -114,4 +115,30 @@
             },
         });
     });
+
+    // var form_rejeitar = document.getElementById('alert-delete');
+    function modalDelete(id) {
+        console.log(id)
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-danger ms-3',
+                cancelButton: 'btn btn-secondary' // adiciona uma margem de 3px para a direita
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Deseja mesmo excluir?',
+            text: "Você excluirá todos os registros de atendimentos desse cliente!",
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonText: 'Excluir',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('cliente-destroy', ':id') }}".replace(':id', id);
+            }
+        })
+    }
 </script>

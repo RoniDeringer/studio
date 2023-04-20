@@ -73,10 +73,10 @@
                                                 <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                                     <i class="material-icons text-secondary position-relative text-lg">visibility</i>
                                                 </a>
-                                                <a href="{{route('editar-cliente',$cliente->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                                                <a href="{{route('editar-cliente',$cliente->id_cliente)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                                     <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
                                                 </a>
-                                                <a href="{{route('cliente-destroy',$cliente->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                                <a href="{{route('cliente-destroy',$cliente->id_cliente)}}" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                                                     <i class="material-icons text-secondary position-relative text-lg">delete</i> 
                                                     tem ctz? sweet
                                                 </a>

@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="card-body">  
-                                <form action="{{route('cliente-edit', $user->id)}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 300px;">
+                                <form action="{{route('cliente-edit', $cliente->id)}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 300px;">
                                 @csrf
                                     <div class="multisteps-form__panel border-radius-xl bg-white js-active"
                                         data-animation="FadeIn">

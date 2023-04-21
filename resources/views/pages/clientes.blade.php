@@ -15,6 +15,9 @@
 <div class="row">
     <div class="col">
         @isset($clientes)
+        <div class="text-dark">
+            https://www.creative-tim.com/live/material-dashboard-pro-laravel
+        </div>
         <div class="card mt-5 pb-5">
             <div class="card-header p-3 pt-2">
                 <div class="icon icon-lg icon-shape bg-gradient-info shadow text-center border-radius-xl mt-n4 float-start">
@@ -118,7 +121,6 @@
 
     // var form_rejeitar = document.getElementById('alert-delete');
     function modalDelete(id) {
-        console.log(id)
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-danger ms-3',

@@ -63,8 +63,7 @@
                                                                             </a> --}}
                                                                         </div>
                                                                     </div>
-                                                                    {{-- <a href="{{route('admin-projetos-ver', $atendimento)}}" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal"> --}}
-                                                                    <a href="#" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal">
+                                                                    <a href="{{route('view-atendimento',$atendimento->id)}}" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal">
                                                                         <div class="col-md-2 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-8">Data</h6>
                                                                             <h5 class="text-md text-bold opacity-9">
@@ -98,19 +97,6 @@
                                                                                 @endif
                                                                             </h5>
                                                                         </div>
-
-                                                                        <div class="text-sm d-flex justify-content-between" style="width: 6.333333%;">
-                                                                            {{-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product"> --}}
-                                                                                <i class="material-icons text-secondary position-relative text-lg">visibility</i>
-                                                                            {{-- </a> --}}
-                                                                            {{-- <a href="#" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product"> --}}
-                                                                                <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
-                                                                            {{-- </a> --}}
-                                                                            {{-- <a href="#" onclick="" data-bs-toggle="tooltip" data-bs-original-title="Delete product"> --}}
-                                                                                <i class="material-icons text-secondary position-relative text-lg">delete</i> 
-                                                                            {{-- </a> --}}
-                                                                        </div>
-                                                                            
                                                                     </a>
                                                                 </div>
                                                                 <hr class="horizontal dark mt-4 mb-0">

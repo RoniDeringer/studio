@@ -127,6 +127,13 @@ class AtendimentoController extends Controller
         }
     }
 
+    public function view($atendimento){
+
+        return view('pages.view-atendimento');
+
+
+    }
+
     public function update()
     {
         // $user = request()->user();

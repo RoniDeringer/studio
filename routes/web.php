@@ -23,7 +23,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-            
+use App\Http\Controllers\TerceirizadoController;
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
@@ -49,6 +49,9 @@ Route::get('clientes/{cliente}/edit',[ClienteController::class, 'edit'])->middle
 Route::post('clientes/{cliente}/edit',[ClienteController::class, 'update'])->middleware('auth')->name('cliente-edit');
 
 
+Route::get('terceirizados',[TerceirizadoController::class, 'index'])->middleware('auth')->name('terceirizados');
+Route::get('terceirizados/adicionar',[TerceirizadoController::class, 'addTerceirizado'])->middleware('auth')->name('add-terceirizado');
+Route::post('terceirizados/adicionar',[TerceirizadoController::class, 'store'])->middleware('auth')->name('terceirizado-store');
 
 
 

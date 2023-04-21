@@ -22,7 +22,6 @@
                     href="{{ route('atendimentos') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <span class="material-icons">receipt_long</span>
-
                     </div>
                     <span class="nav-link-text ms-1">Atendimentos</span>
                 </a>
@@ -32,17 +31,15 @@
                     href="{{ route('clientes') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <span class="material-icons">groups</span>
-
                     </div>
                     <span class="nav-link-text ms-1">Clientes</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'terceirizados' ? 'active bg-gradient-primary' : '' }} "
-                    href="{{ route('clientes') }}">
+                    href="{{ route('terceirizados') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <span class="material-icons">groups</span>
-
+                        <span class="material-icons">handshake</span>
                     </div>
                     <span class="nav-link-text ms-1">Terceirizados</span>
                 </a>

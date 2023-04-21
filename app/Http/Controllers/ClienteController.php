@@ -32,7 +32,7 @@ class ClienteController extends Controller
 
     public function addCliente()
     {
-        return view('pages.add-cliente');
+        return view('pages.add-cliente', ['cidades' => self::CIDADES]);
     }
 
     public function store(Request $request)

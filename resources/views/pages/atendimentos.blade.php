@@ -16,7 +16,7 @@
                 <div class="card mt-5 pb-5">
                     <div class="card-header p-3 pt-2">
                         <div
-                            class="icon icon-lg icon-shape bg-gradient-info shadow text-center border-radius-xl mt-n4 float-start">
+                            class="icon icon-lg icon-shape bg-gradient-primary shadow text-center border-radius-xl mt-n4 float-start">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
                         <div class="row">
@@ -25,11 +25,15 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex justify-content-end">
-                                    <a href="{{route('add-atendimento')}}"
-                                        class="mr-3 justify-content-end btn bg-gradient-primary btn-sm mb-0">+&nbsp; Atendimento
+                                    <a href="{{route('add-atendimento')}}">
+                                        <button class="btn btn-icon btn-3 btn-primary" type="button">
+                                            <span class="btn-inner--icon"><i class="material-icons">add</i></span>
+                                          <span class="btn-inner--text">Atendimento</span>
+                                        </button>
                                     </a>
+                                    
                                     <a href="#" style="padding-left:5px">
-                                        <button class="justify-content-end btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button"
+                                        <button class="justify-content-end btn btn-outline-primary mb-0 mt-sm-0 mt-1" data-type="csv" type="button"
                                             name="button">Export
                                         </button>
                                     </a>

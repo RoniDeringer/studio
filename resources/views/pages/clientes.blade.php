@@ -20,17 +20,20 @@
         </div>
         <div class="card mt-5 pb-5">
             <div class="card-header p-3 pt-2">
-                <div class="icon icon-lg icon-shape bg-gradient-info shadow text-center border-radius-xl mt-n4 float-start">
+                <div class="icon icon-lg icon-shape bg-gradient-primary shadow text-center border-radius-xl mt-n4 float-start">
                     <i class="material-icons opacity-10">groups</i>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <h5 class="mb-0">Clientes</h5>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="d-flex justify-content-end">
-                            <a href="{{route('add-cliente')}}"
-                                class="mr-3 justify-content-end btn bg-gradient-primary btn-sm mb-0">+&nbsp; Cliente
+                            <a href="{{route('add-cliente')}}">
+                                <button class="btn btn-icon btn-3 btn-primary" type="button">
+                                    <span class="btn-inner--icon"><i class="material-icons">add</i></span>
+                                  <span class="btn-inner--text">Cliente</span>
+                                </button>
                             </a>
                         </div>
                     </div>

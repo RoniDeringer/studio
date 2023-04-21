@@ -8,8 +8,8 @@ use App\Models\Terceirizado;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Laravel\Ui\Presets\React;
 
 class FuncionarioController extends Controller
 {
@@ -21,12 +21,14 @@ class FuncionarioController extends Controller
             'users.nome AS nome',
             'funcionario.cargo AS cargo',
             'funcionario.foto AS foto',
-            'users.telefone AS telefone',
             'users.cidade AS cidade',
             'users.data_nascimento AS data_nascimento',
+            DB::raw('SUM(atendimento.valor) AS total_valor')
 
         )
             ->join('users', 'users.id', 'funcionario.id_user')
+            ->leftJoin('atendimento', 'atendimento.id_funcionario', 'funcionario.id')
+            ->groupBy('funcionario.id', 'users.id', 'users.nome', 'funcionario.cargo', 'funcionario.foto',  'users.cidade', 'users.data_nascimento')
             ->get();
         return view('pages.funcionarios', ['funcionarios' => $funcionarios]);
     }

@@ -15,9 +15,6 @@
 <div class="row">
     <div class="col">
         @isset($clientes)
-        <div class="text-dark">
-            https://www.creative-tim.com/live/material-dashboard-pro-laravel
-        </div>
         <div class="card mt-5 pb-5">
             <div class="card-header p-3 pt-2">
                 <div class="icon icon-lg icon-shape bg-gradient-primary shadow text-center border-radius-xl mt-n4 float-start">

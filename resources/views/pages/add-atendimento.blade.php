@@ -41,13 +41,13 @@
                                                         <select name="cliente_id" class="form-control" style="display: none" id="cliente_id">
                                                             <option value="" selected disabled></option>
                                                             @foreach ($data['clientes'] as $cliente)
-                                                                <option value="{{$cliente['id_user']}}">{{$cliente['nome']}}</option>
+                                                                <option value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
                                                             @endforeach
                                                         </select>
                                                         <input  name="cliente" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
                                                         <datalist  class="form-control" name="choices-cliente" id="choices-cliente" style="display: none">
                                                             @foreach ($data['clientes'] as $cliente)
-                                                                <option data-value="{{$cliente['id_user']}}">{{$cliente['nome']}}</option>
+                                                                <option data-value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
                                                             @endforeach
                                                         </datalist>
                                                     </div>
@@ -140,27 +140,18 @@
 {{-- <script src="{{asset('js/theme/plugins/choices.min.js')}}"></script> --}}
 {{-- <script src="{{asset('js/theme/plugins/popper.min.js')}}"></script> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.24/sweetalert2.all.min.js" integrity="sha512-Ty04j+bj8CRJsrPevkfVd05iBcD7Bx1mcLaDG4lBzDSd6aq2xmIHlCYQ31Ejr+JYBPQDjuiwS/NYDKYg5N7XKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
-
 <script>
-    //  if (document.getElementById('choices-state')) {
-    //     var element = document.getElementById('choices-state');
-    //     const example = new Choices(element, {
-    //         searchEnabled: false
-    //     });
-    // };
-    // $(document).ready(function() {
-    //     $('#valor').mask('000,00');
-    // });
-    
+
+    $(document).ready(function() {
+        $('#valor').mask('000,00');
+    });
+
     document.addEventListener("DOMContentLoaded", function(e) {
-       
+     
         document.querySelectorAll('#clientes_datalist').forEach(input => {
             input.addEventListener('change', function(e){
                 let valueDatalist = 0

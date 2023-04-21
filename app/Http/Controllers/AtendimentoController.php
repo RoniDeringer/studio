@@ -7,7 +7,10 @@ use App\Models\Cliente;
 use App\Models\Funcionario;
 use App\Models\Servico;
 use App\Models\Terceirizado;
+use DateTime;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AtendimentoController extends Controller
 {
@@ -76,7 +79,7 @@ class AtendimentoController extends Controller
             ->get();
 
         $clientes = Cliente::select(
-            'cliente.id_user AS id_user',
+            'cliente.id',
             'users.nome AS nome'
         )
             ->join('users', 'users.id', 'cliente.id_user')
@@ -96,7 +99,32 @@ class AtendimentoController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        try {
+            $atendimento = new Atendimento();
+            $atendimento->id_cliente = $request->cliente_id;
+            $atendimento->data = DateTime::createFromFormat('d/m/Y', $request->data);
+            $atendimento->valor = floatval(str_replace(',', '.', $request->valor));
+            $atendimento->servico = $request->servico_id;
+            $atendimento->observacao = $request->observacao;
+
+            if ($funcionario = Funcionario::where('id_user', $request->profissional_id)->first()) {
+                $atendimento->id_funcionario = $funcionario->id;
+            } else {
+                $terceirizado = Terceirizado::where('id_user', $request->profissional_id)->first();
+                $atendimento->id_terceirizado = $terceirizado->id;
+            }
+
+            $cliente = Cliente::find($request->cliente_id);
+            $cliente->ultimo_atendimento = DateTime::createFromFormat('d/m/Y', $request->data);
+
+            $atendimento->save();
+            $cliente->save();
+
+            return redirect()->route('atendimentos')->with(['type' => 'alert-success', 'message' => 'Atendimento cadastrado com sucesso!']);
+        } catch (Exception $ex) {
+            Log::error('Erro ao criar atendimento: ' . $ex->getMessage());
+            return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
+        }
     }
 
     public function update()

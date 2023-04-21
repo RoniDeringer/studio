@@ -25,11 +25,11 @@
                         <div class="card">
                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary text-center shadow-primary border-radius-lg pt-3 pb-3">
-                                    <h5 class="mb-0 text-white">Novo Terceirizado</h5>
+                                    <h5 class="mb-0 text-white">Novo Funcionário</h5>
                                 </div>
                             </div>
                             <div class="card-body">  
-                                <form action="{{route('terceirizado-store')}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 320px;">
+                                <form action="{{route('funcionario-store')}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 320px;">
                                 @csrf
                                     <div class="multisteps-form__panel border-radius-xl bg-white js-active"
                                         data-animation="FadeIn">
@@ -79,29 +79,21 @@
                                             <div class="row mt-3">
                                                 <div class="col-12 col-sm-6">
                                                     <div class="input-group input-group-dynamic">
-                                                        <label class="form-label">Função</label>
-                                                        <input name="funcao" class="multisteps-form__input form-control" type="text"
+                                                        <label class="form-label">Cargo</label>
+                                                        <input name="cargo" class="multisteps-form__input form-control" type="text"
                                                             onfocus="focused(this)" onfocusout="defocused(this)">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                     <div class="input-group input-group-dynamic">
                                                         <label class="form-label">Foto</label>
-                                                        <input name="foto" id="foto" class="multisteps-form__input form-control" type="text"
-                                                            onfocus="focused(this)" onfocusout="defocused(this)">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-4">
-                                                <div class="col-12">
-                                                    <div class="input-group input-group-dynamic">
-                                                        <textarea name="observacao" class="multisteps-form__textarea form-control" rows="2"
-                                                            placeholder="Observação"></textarea>
+                                                        <input name="foto" id="foto" class="multisteps-form__input form-control"
+                                                            onfocus="focused(this)" onfocusout="defocused(this)" accept="image/*" capture=environment type="file">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="button-row d-flex justify-content-between mt-4">
-                                                <a href="{{route('terceirizados')}}">
+                                                <a href="{{route('funcionarios')}}">
                                                     <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button">
                                                         Cancelar
                                                     </button>

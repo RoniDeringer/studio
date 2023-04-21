@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -54,6 +55,9 @@ Route::get('terceirizados/adicionar',[TerceirizadoController::class, 'addTerceir
 Route::post('terceirizados/adicionar',[TerceirizadoController::class, 'store'])->middleware('auth')->name('terceirizado-store');
 
 
+Route::get('funcionarios',[FuncionarioController::class, 'index'])->middleware('auth')->name('funcionarios');
+Route::get('funcionarios/adicionar',[FuncionarioController::class, 'addFuncionario'])->middleware('auth')->name('add-funcionario');
+Route::post('funcionarios/adicionar',[FuncionarioController::class, 'store'])->middleware('auth')->name('funcionario-store');
 
 
 Route::get('verify', function () {

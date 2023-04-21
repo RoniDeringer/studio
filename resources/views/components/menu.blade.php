@@ -44,6 +44,15 @@
                     <span class="nav-link-text ms-1">Terceirizados</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'funcionarios' ? 'active bg-gradient-primary' : '' }} "
+                    href="{{ route('funcionarios') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <span class="material-icons">badge</span>
+                    </div>
+                    <span class="nav-link-text ms-1">Funcionários</span>
+                </a>
+            </li>
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pages</h6>

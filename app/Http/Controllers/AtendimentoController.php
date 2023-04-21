@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Atendimento;
+use App\Models\Cliente;
+use App\Models\Funcionario;
+use App\Models\Servico;
+use App\Models\Terceirizado;
 use Illuminate\Http\Request;
 
 class AtendimentoController extends Controller
@@ -54,9 +58,45 @@ class AtendimentoController extends Controller
         return view('pages.atendimentos', ['atendimentos' => $atendimentos]);
     }
 
-    public function addAtendimento(){
-        return view('pages.add-atendimento');
+    public function addAtendimento()
+    {
 
+        $funcionarios = Funcionario::select(
+            'funcionario.id_user AS id_user',
+            'users.nome AS nome'
+        )
+            ->join('users', 'users.id', 'funcionario.id_user')
+            ->get();
+
+        $terceirizados = Terceirizado::select(
+            'terceirizado.id_user AS id_user',
+            'users.nome AS nome'
+        )
+            ->join('users', 'users.id', 'terceirizado.id_user')
+            ->get();
+
+        $clientes = Cliente::select(
+            'cliente.id_user AS id_user',
+            'users.nome AS nome'
+        )
+            ->join('users', 'users.id', 'cliente.id_user')
+            ->get();
+
+        $servicos = Servico::select("id", "nome")->get();
+
+        $data = [
+            'dataAtual' => date("d/m/Y"),
+            'profissionais' => array_merge($funcionarios->toArray(), $terceirizados->toArray()),
+            'clientes' => $clientes->toArray(),
+            'servicos' => $servicos->toArray(),
+        ];
+
+        return view('pages.add-atendimento', ['data' => $data]);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request);
     }
 
     public function update()

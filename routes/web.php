@@ -38,6 +38,7 @@ Route::post('reset-password', [SessionsController::class, 'update'])->middleware
 Route::get('atendimentos', [AtendimentoController::class, 'index'])->middleware('auth')->name('atendimentos');
 Route::get('atendimentos/{user}', [AtendimentoController::class, 'viewCliente'])->middleware('auth')->name('atendimentos-cliente');
 Route::get('atendimento/adicionar', [AtendimentoController::class, 'addAtendimento'])->middleware('auth')->name('add-atendimento');
+Route::post('atendimento/adicionar', [AtendimentoController::class, 'store'])->middleware('auth')->name('atendimento-store');
 
 Route::get('clientes',[ClienteController::class, 'index'])->middleware('auth')->name('clientes');
 Route::get('clientes/adicionar',[ClienteController::class, 'addCliente'])->middleware('auth')->name('add-cliente');

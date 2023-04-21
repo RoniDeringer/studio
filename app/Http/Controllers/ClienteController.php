@@ -82,6 +82,8 @@ class ClienteController extends Controller
         $cliente = Cliente::find($id_cliente);
         $user = User::where('id',$cliente->id_user)->first();
         $user->data_nascimento =  date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
+        //caso na tiver data selecionada?
+
 
         return view('pages.edit-cliente', ['cliente' => $cliente, 'user'=> $user] );
     }

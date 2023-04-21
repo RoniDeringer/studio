@@ -98,6 +98,19 @@
                                                                                 @endif
                                                                             </h5>
                                                                         </div>
+
+                                                                        <div class="text-sm d-flex justify-content-between" style="width: 6.333333%;">
+                                                                            {{-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product"> --}}
+                                                                                <i class="material-icons text-secondary position-relative text-lg">visibility</i>
+                                                                            {{-- </a> --}}
+                                                                            {{-- <a href="#" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product"> --}}
+                                                                                <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
+                                                                            {{-- </a> --}}
+                                                                            {{-- <a href="#" onclick="" data-bs-toggle="tooltip" data-bs-original-title="Delete product"> --}}
+                                                                                <i class="material-icons text-secondary position-relative text-lg">delete</i> 
+                                                                            {{-- </a> --}}
+                                                                        </div>
+                                                                            
                                                                     </a>
                                                                 </div>
                                                                 <hr class="horizontal dark mt-4 mb-0">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@php session()->put('activePage', 'clientes'); @endphp
+@php session()->put('activePage', 'atendimentos'); @endphp
 @section('style')
 <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="card-body">  
-                                <form action="{{route('cliente-store')}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 300px;">
+                                <form action="{{route('atendimento-store')}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 260px;">
                                 @csrf
                                     <div class="multisteps-form__panel border-radius-xl bg-white js-active"
                                         data-animation="FadeIn">
@@ -37,41 +37,71 @@
                                             <div class="row mt-3">
                                                 <div class="col-12 col-sm-6">
                                                     <div class="input-group input-group-dynamic">
-                                                        <label class="form-label">Nome</label>
-                                                        <input name="nome" class="multisteps-form__input form-control" type="text"
-                                                            onfocus="focused(this)" onfocusout="defocused(this)">
+                                                        <label class="form-label">Cliente</label>
+                                                        <select name="cliente_id" class="form-control" style="display: none" id="cliente_id">
+                                                            <option value="" selected disabled></option>
+                                                            @foreach ($data['clientes'] as $cliente)
+                                                                <option value="{{$cliente['id_user']}}">{{$cliente['nome']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input  name="cliente" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
+                                                        <datalist  class="form-control" name="choices-cliente" id="choices-cliente" style="display: none">
+                                                            @foreach ($data['clientes'] as $cliente)
+                                                                <option data-value="{{$cliente['id_user']}}">{{$cliente['nome']}}</option>
+                                                            @endforeach
+                                                        </datalist>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                     <div class="input-group input-group-dynamic">
-                                                        <label class="form-label">Telefone</label>
-                                                        <input name="telefone" id="telefone" class="multisteps-form__input form-control" type="text"
-                                                            onfocus="focused(this)" onfocusout="defocused(this)">
+                                                        <label class="form-label">Profissional</label>
+                                                        <select name="profissional_id" class="form-control" style="display: none" id="profissional_id">
+                                                            <option value="" selected disabled></option>
+                                                            @foreach ($data['profissionais'] as $profissional)
+                                                                <option value="{{$profissional['id_user']}}">{{$profissional['nome']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input  name="profissional" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-profissional" id="profissionais_datalist">
+                                                        <datalist  class="form-control" name="choices-profissional" id="choices-profissional" style="display: none">
+                                                            @foreach ($data['profissionais'] as $profissional)
+                                                                <option data-value="{{$profissional['id_user']}}">{{$profissional['nome']}}</option>
+                                                            @endforeach
+                                                        </datalist>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row mt-4">
-                                                <div class="col-12 col-sm-6">
+                                                <div class="col-12 col-sm-4">
                                                     <div class="input-group input-group-dynamic">
-                                                        <label class="form-label">Data Nascimento</label>
-                                                        <input name="dt_nascimento" id="dt_nascimento" class="multisteps-form__input form-control" type="text"
+                                                        <label class="form-label">Serviço</label>
+                                                        <select name="servico_id" class="form-control" style="display: none" id="servico_id">
+                                                            <option value="" selected disabled></option>
+                                                            @foreach ($data['servicos'] as $servico)
+                                                                <option value="{{$servico['id']}}">{{$servico['nome']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input  name="servico" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-servico" id="servicos_datalist">
+                                                        <datalist  class="form-control" name="choices-servico" id="choices-servico" style="display: none">
+                                                            @foreach ($data['servicos'] as $servico)
+                                                                <option data-value="{{$servico['id']}}">{{$servico['nome']}}</option>
+                                                            @endforeach
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="input-group input-group-dynamic">
+                                                        <label class="form-label">Valor</label>
+                                                        <input name="valor" id="valor" class="multisteps-form__input form-control" type="text"
                                                             onfocus="focused(this)" onfocusout="defocused(this)">
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                                    <div class="input-group input-group-static mb-4">
-                                                        <label for="cidade" class="ms-0">Cidade</label>
-                                                        <select class="form-control" id="cidade" name="cidade">
-                                                          <option value="dona_emma">Dona Emma</option>
-                                                          <option value="presidente_getulio">Presidente Getúlio</option>
-                                                          <option value="ibirama">Ibirama</option>
-                                                          <option value="rio_do_sul">Rio do Sul</option>
-                                                          <option value="Witmarsum">Witmarsum</option>
-                                                          <option value="vitor_meireles">Vitor Meireles</option>
-                                                          <option value="salete">Salete</option>
-                                                          <option value="apiuna">Apiúna</option>
-                                                        </select>
-                                                      </div>
+
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="input-group input-group-dynamic is-filled">
+                                                        <label class="form-label">Data</label>
+                                                        <input required name="data" class="multisteps-form__input form-control" value="{{$data['dataAtual']}}" type="text"
+                                                            onfocus="focused(this)" onfocusout="defocused(this)">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row mt-4">
@@ -83,7 +113,7 @@
                                                 </div>
                                             </div>
                                             <div class="button-row d-flex justify-content-between mt-4">
-                                                <a href="{{route('clientes')}}">
+                                                <a href="{{route('atendimentos')}}">
                                                     <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button">
                                                         Cancelar
                                                     </button>
@@ -109,8 +139,14 @@
 {{-- <script src="{{asset('js/theme/plugins/multistep-form.js')}}"></script> --}}
 {{-- <script src="{{asset('js/theme/plugins/choices.min.js')}}"></script> --}}
 {{-- <script src="{{asset('js/theme/plugins/popper.min.js')}}"></script> --}}
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.24/sweetalert2.all.min.js" integrity="sha512-Ty04j+bj8CRJsrPevkfVd05iBcD7Bx1mcLaDG4lBzDSd6aq2xmIHlCYQ31Ejr+JYBPQDjuiwS/NYDKYg5N7XKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
 
 <script>
     //  if (document.getElementById('choices-state')) {
@@ -119,12 +155,59 @@
     //         searchEnabled: false
     //     });
     // };
-    $(document).ready(function() {
-        $('#dt_nascimento').mask('00/00/0000');
-        $('#telefone').mask('(00) 00000-0000');
-    });
+    // $(document).ready(function() {
+    //     $('#valor').mask('000,00');
+    // });
     
-  
+    document.addEventListener("DOMContentLoaded", function(e) {
+       
+        document.querySelectorAll('#clientes_datalist').forEach(input => {
+            input.addEventListener('change', function(e){
+                let valueDatalist = 0
+                let pai = input.parentElement
+
+                let listagem = document.querySelectorAll('#choices-cliente option')
+                listagem.forEach(nome => {
+                    if(nome.value == input.value){
+                        valueDatalist = nome.getAttribute('data-value')
+                    }
+                })
+                pai.childNodes[3].value = valueDatalist
+            })
+        })
+       
+        document.querySelectorAll('#profissionais_datalist').forEach(input => {
+            input.addEventListener('change', function(e){
+                let valueDatalist = 0
+                let pai = input.parentElement
+
+                let listagem = document.querySelectorAll('#choices-profissional option')
+                listagem.forEach(nome => {
+                    if(nome.value == input.value){
+                        valueDatalist = nome.getAttribute('data-value')
+                    }
+                })
+                pai.childNodes[3].value = valueDatalist
+            })
+        })
+       
+        document.querySelectorAll('#servicos_datalist').forEach(input => {
+            input.addEventListener('change', function(e){
+                let valueDatalist = 0
+                let pai = input.parentElement
+
+                let listagem = document.querySelectorAll('#choices-servico option')
+                listagem.forEach(nome => {
+                    if(nome.value == input.value){
+                        valueDatalist = nome.getAttribute('data-value')
+                    }
+                })
+                pai.childNodes[3].value = valueDatalist
+            })
+        })
+
+
+    })
 
     
 </script>

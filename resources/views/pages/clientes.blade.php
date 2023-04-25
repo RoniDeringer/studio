@@ -74,7 +74,7 @@
                                             </td>
                                             <td class="py-3">5</td>
                                             <td class="text-sm">
-                                                <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                                <a href="{{route('view-cliente',$cliente->id_cliente)}}" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                                     <i class="material-icons text-secondary position-relative text-lg">visibility</i>
                                                 </a>
                                                 <a href="{{route('editar-cliente',$cliente->id_cliente)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
@@ -84,7 +84,6 @@
                                                     <i class="material-icons text-secondary position-relative text-lg">delete</i> 
                                                 </a>
                                             </td>
-                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

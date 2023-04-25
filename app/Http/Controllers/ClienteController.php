@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Atendimento;
 use App\Models\Cliente;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Laravel\Ui\Presets\React;
 
@@ -114,5 +117,43 @@ class ClienteController extends Controller
             Log::error('Erro ao atualizar cliente! Erro: ' . $ex->getMessage());
             return redirect()->route('clientes')->with(['type' => 'alert-danger', 'message' => 'Erro ao atualizar cliente!']);
         }
+    }
+    public function view($cliente_id){
+        $cliente = Cliente::select(
+            'cliente.id AS cliente_id',
+            'users.id AS user_id',
+            'users.nome',
+            'users.telefone',
+            'users.cidade',
+            'users.ultimo_atendimento',
+            'users.data_nascimento',
+        )
+        ->join('users', 'users.id', 'cliente.id_user')
+        ->where('cliente.id', $cliente_id)
+        ->first();
+
+        $idade = (Carbon::createFromFormat('Y-m-d', $cliente->data_nascimento))->age;
+        $cliente->idade = $idade;
+
+        $atendimentos = Atendimento::select(
+            DB::raw('SUM(atendimento.valor) as valor_total')
+        )
+        ->join('cliente', 'cliente.id', 'atendimento.id_cliente')
+        ->where('cliente.id', $cliente_id)
+        ->first();
+     
+        $total_atendimentos = Atendimento::join('cliente', 'cliente.id', 'atendimento.id_cliente')
+        ->where('cliente.id', $cliente_id)
+        ->count();
+        $atendimentos->total_atendimentos = $total_atendimentos;
+
+        dump($cliente);
+        dump($atendimentos);
+        dd('fim');
+        return view('pages.view-cliente',[
+            'cliente' => $cliente,
+            'atendimentos' => $atendimentos,
+        ]);
+
     }
 }

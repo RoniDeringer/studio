@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Atendimento;
 use App\Models\Cliente;
 use App\Models\Funcionario;
 use App\Models\Terceirizado;
@@ -23,13 +24,24 @@ class FuncionarioController extends Controller
             'funcionario.foto AS foto',
             'users.cidade AS cidade',
             'users.data_nascimento AS data_nascimento',
-            DB::raw('SUM(atendimento.valor) AS total_valor')
-
         )
             ->join('users', 'users.id', 'funcionario.id_user')
-            ->leftJoin('atendimento', 'atendimento.id_funcionario', 'funcionario.id')
-            ->groupBy('funcionario.id', 'users.id', 'users.nome', 'funcionario.cargo', 'funcionario.foto',  'users.cidade', 'users.data_nascimento')
             ->get();
+
+            $count = 0;
+            foreach ($funcionarios as $funcionario) {
+                $atendimentos = Atendimento::select(
+                    DB::raw('SUM(atendimento.valor) as valor_total')
+                )
+                    ->where('id_funcionario', $funcionario->id_funcionario)
+                    ->first();
+    
+                $total_atendimentos = Atendimento::where('id_funcionario', $funcionario->id_funcionario)
+                    ->count();
+                $funcionarios[$count]->total_atendimentos = $total_atendimentos;
+                $funcionarios[$count]->rendimento = $atendimentos->valor_total;
+                $count++;
+            }
         return view('pages.funcionarios', ['funcionarios' => $funcionarios]);
     }
 

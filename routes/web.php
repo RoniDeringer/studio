@@ -40,7 +40,7 @@ Route::get('atendimentos', [AtendimentoController::class, 'index'])->middleware(
 Route::get('atendimentos/{user}', [AtendimentoController::class, 'viewCliente'])->middleware('auth')->name('atendimentos-cliente');
 Route::get('atendimento/adicionar', [AtendimentoController::class, 'addAtendimento'])->middleware('auth')->name('add-atendimento');
 Route::post('atendimento/adicionar', [AtendimentoController::class, 'store'])->middleware('auth')->name('atendimento-store');
-Route::get('atendimento/{atendimento}/view',[AtendimentoController::class, 'view'])->middleware('auth')->name('view-atendimento');
+Route::get('atendimento/{atendimento}/visualizar',[AtendimentoController::class, 'view'])->middleware('auth')->name('view-atendimento');
 
 Route::get('clientes',[ClienteController::class, 'index'])->middleware('auth')->name('clientes');
 Route::get('clientes/adicionar',[ClienteController::class, 'addCliente'])->middleware('auth')->name('add-cliente');
@@ -48,6 +48,7 @@ Route::post('clientes/adicionar',[ClienteController::class, 'store'])->middlewar
 Route::get('clientes/{cliente}/excluir',[ClienteController::class, 'destroy'])->middleware('auth')->name('cliente-destroy');
 Route::get('clientes/{cliente}/edit',[ClienteController::class, 'edit'])->middleware('auth')->name('editar-cliente');
 Route::post('clientes/{cliente}/edit',[ClienteController::class, 'update'])->middleware('auth')->name('cliente-edit');
+Route::get('clientes/{cliente}/visualizar',[ClienteController::class, 'view'])->middleware('auth')->name('view-cliente');
 
 
 Route::get('terceirizados',[TerceirizadoController::class, 'index'])->middleware('auth')->name('terceirizados');

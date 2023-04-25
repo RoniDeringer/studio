@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Atendimento;
 use App\Models\Cliente;
 use App\Models\Terceirizado;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Laravel\Ui\Presets\React;
 
@@ -14,7 +16,33 @@ class TerceirizadoController extends Controller
 {
     public function index()
     {
-        return view('pages.terceirizados');
+        $terceirizados = Terceirizado::select(
+            'terceirizado.id AS terceirizado_id',
+            'users.id AS user_id',
+            'terceirizado.funcao',
+            'terceirizado.foto',
+            'users.nome',
+            'terceirizado.created_at'
+        )
+            ->join('users', 'users.id', 'terceirizado.id_user')
+            ->get();
+
+        $count = 0;
+        foreach ($terceirizados as $terceirizado) {
+            $atendimentos = Atendimento::select(
+                DB::raw('SUM(atendimento.valor) as valor_total')
+            )
+                ->where('id_terceirizado', $terceirizado->terceirizado_id)
+                ->first();
+
+            $total_atendimentos = Atendimento::where('id_terceirizado', $terceirizado->terceirizado_id)
+                ->count();
+            $terceirizados[$count]->total_atendimentos = $total_atendimentos;
+            $terceirizados[$count]->rendimento = $atendimentos->valor_total;
+            $count++;
+        }
+
+        return view('pages.terceirizados',['terceirizados' => $terceirizados]);
     }
 
     public function addTerceirizado()
@@ -45,6 +73,4 @@ class TerceirizadoController extends Controller
             return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
         }
     }
-
-
 }

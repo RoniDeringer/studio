@@ -44,6 +44,7 @@
                                     <th class="text-uppercase text-xxs font-weight-bolder opacity-7 ps-2">Cargo</th>
                                     <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Atendimentos</th>
                                     <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Rendimento</th>
+                                    <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,10 +68,25 @@
                                             <p class="text-sm font-weight-normal mb-0">{{$funcionario->cargo}}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <p class="text-sm font-weight-normal mb-0">32</p>
+                                            <p class="text-sm font-weight-normal mb-0">{{$funcionario->total_atendimentos}}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="badge badge-success">R$ {{$funcionario->total_valor}}</span>
+                                            <span class="badge badge-success">
+                                                @if ($funcionario->rendimento)
+                                                        R$ {{ number_format($funcionario->rendimento, 2, ',', '.') }}
+                                                    @endif
+                                            </span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <a href="{{route('view-cliente',2)}}" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                                <i class="material-icons text-secondary position-relative text-lg">visibility</i>
+                                            </a>
+                                            <a href="{{route('editar-cliente',2)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                                                <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
+                                            </a>
+                                            <a href="#"  data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                                <i class="material-icons text-secondary position-relative text-lg">delete</i> 
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

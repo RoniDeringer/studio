@@ -77,10 +77,10 @@
                                         </span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{route('view-cliente',2)}}" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                             <i class="material-icons text-secondary position-relative text-lg">visibility</i>
                                         </a>
-                                        <a href="{{route('editar-cliente',2)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                                        <a href="{{route('editar-terceirizado', $terceirizado->terceirizado_id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                             <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
                                         </a>
                                         <a href="#"  data-bs-toggle="tooltip" data-bs-original-title="Delete product">

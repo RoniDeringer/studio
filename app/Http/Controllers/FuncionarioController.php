@@ -110,4 +110,19 @@ class FuncionarioController extends Controller
 
         return true; // arquivo válido
     }
+
+    public function edit($id_funcionario){
+        $funcionario = Funcionario::find($id_funcionario);
+        $user = User::where('id', $funcionario->id_user)->first();
+        $user->data_nascimento =  date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
+        //caso na tiver data selecionada?
+
+        return view('pages.edit-funcionario', ['funcionario' => $funcionario, 'user'=> $user, 'cidades'=> self::CIDADES] );
+    }
+    
+    public function update(Request $request, $id_funcionario){
+        dump('$id_funcionario');
+        dump($id_funcionario);
+        dd($request);
+    }
 }

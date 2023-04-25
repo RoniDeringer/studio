@@ -73,4 +73,37 @@ class TerceirizadoController extends Controller
             return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
         }
     }
+
+
+    public function edit($id_terceirizado){
+        
+        $terceirizado = Terceirizado::find($id_terceirizado);
+        $user = User::where('id', $terceirizado->id_user)->first();
+        $user->data_nascimento =  date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
+        //caso na tiver data selecionada?
+   
+
+
+        
+        // $user->nome
+        // $user->telefone 
+        // $user->cidade 
+        // $user->data_nascimento
+
+        // $terceirizado 
+        // $terceirizado->id_user 
+        // $terceirizado->funcao 
+        // $terceirizado->observacao
+        // $terceirizado->foto 
+      
+
+
+        return view('pages.edit-terceirizado', ['terceirizado' => $terceirizado, 'user'=> $user, 'cidades'=>self::CIDADES] );
+    }
+
+    public function update (Request $request, $id_terceirizado){
+        dump('terceirizado');
+        dump($id_terceirizado);
+        dd($request);
+    }
 }

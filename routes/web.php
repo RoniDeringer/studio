@@ -54,11 +54,15 @@ Route::get('clientes/{cliente}/visualizar',[ClienteController::class, 'view'])->
 Route::get('terceirizados',[TerceirizadoController::class, 'index'])->middleware('auth')->name('terceirizados');
 Route::get('terceirizados/adicionar',[TerceirizadoController::class, 'addTerceirizado'])->middleware('auth')->name('add-terceirizado');
 Route::post('terceirizados/adicionar',[TerceirizadoController::class, 'store'])->middleware('auth')->name('terceirizado-store');
+Route::get('terceirizados/{terceirizado}/edit',[TerceirizadoController::class, 'edit'])->middleware('auth')->name('editar-terceirizado');
+Route::post('terceirizados/{terceirizado}/edit',[TerceirizadoController::class, 'update'])->middleware('auth')->name('terceirizado-edit');
 
 
 Route::get('funcionarios',[FuncionarioController::class, 'index'])->middleware('auth')->name('funcionarios');
 Route::get('funcionarios/adicionar',[FuncionarioController::class, 'addFuncionario'])->middleware('auth')->name('add-funcionario');
 Route::post('funcionarios/adicionar',[FuncionarioController::class, 'store'])->middleware('auth')->name('funcionario-store');
+Route::get('funcionarios/{funcionario}/edit',[FuncionarioController::class, 'edit'])->middleware('auth')->name('editar-funcionario');
+Route::post('funcionarios/{funcionario}/edit',[FuncionarioController::class, 'update'])->middleware('auth')->name('funcionario-edit');
 
 
 Route::get('verify', function () {

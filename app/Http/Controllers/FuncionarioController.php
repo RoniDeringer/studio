@@ -28,20 +28,20 @@ class FuncionarioController extends Controller
             ->join('users', 'users.id', 'funcionario.id_user')
             ->get();
 
-            $count = 0;
-            foreach ($funcionarios as $funcionario) {
-                $atendimentos = Atendimento::select(
-                    DB::raw('SUM(atendimento.valor) as valor_total')
-                )
-                    ->where('id_funcionario', $funcionario->id_funcionario)
-                    ->first();
-    
-                $total_atendimentos = Atendimento::where('id_funcionario', $funcionario->id_funcionario)
-                    ->count();
-                $funcionarios[$count]->total_atendimentos = $total_atendimentos;
-                $funcionarios[$count]->rendimento = $atendimentos->valor_total;
-                $count++;
-            }
+        $count = 0;
+        foreach ($funcionarios as $funcionario) {
+            $atendimentos = Atendimento::select(
+                DB::raw('SUM(atendimento.valor) as valor_total')
+            )
+                ->where('id_funcionario', $funcionario->id_funcionario)
+                ->first();
+
+            $total_atendimentos = Atendimento::where('id_funcionario', $funcionario->id_funcionario)
+                ->count();
+            $funcionarios[$count]->total_atendimentos = $total_atendimentos;
+            $funcionarios[$count]->rendimento = $atendimentos->valor_total;
+            $count++;
+        }
         return view('pages.funcionarios', ['funcionarios' => $funcionarios]);
     }
 
@@ -111,18 +111,42 @@ class FuncionarioController extends Controller
         return true; // arquivo válido
     }
 
-    public function edit($id_funcionario){
+    public function edit($id_funcionario)
+    {
         $funcionario = Funcionario::find($id_funcionario);
         $user = User::where('id', $funcionario->id_user)->first();
         $user->data_nascimento =  date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
         //caso na tiver data selecionada?
 
-        return view('pages.edit-funcionario', ['funcionario' => $funcionario, 'user'=> $user, 'cidades'=> self::CIDADES] );
+        return view('pages.edit-funcionario', ['funcionario' => $funcionario, 'user' => $user, 'cidades' => self::CIDADES]);
     }
-    
-    public function update(Request $request, $id_funcionario){
-        dump('$id_funcionario');
-        dump($id_funcionario);
-        dd($request);
+
+    public function update(Request $request, $id_funcionario)
+    {
+        try {
+
+            $funcionario = Funcionario::find($id_funcionario);
+            $user = User::find($funcionario->id_user);
+
+            $funcionario->cargo = $request->cargo;
+            if (!$imagem = $this->formattingImage($request->file('foto'))) {
+                return redirect()->back()->with(['type' => 'alert-danger', 'message' => 'Erro ao cadastrar funcionáro! Imagem inválida.']);
+            }
+            $funcionario->foto = $imagem;
+
+
+            $user->nome = $request->nome;
+            $user->telefone = str_replace(array("(", ")", " ", "-"), "", $request->telefone);
+            $user->data_nascimento = (date('Y-m-d', strtotime($request->dt_nascimento)));
+            $user->cidade = $request->cidade;
+
+            $funcionario->save();
+            $user->save();
+
+            return redirect()->route('funcionarios')->with(['type' => 'alert-success', 'message' => 'Funcionário editado com sucesso.']);
+        } catch (Exception $ex) {
+            Log::error('Erro ao editar funcionario: ' . $ex->getMessage());
+            return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
+        }
     }
 }

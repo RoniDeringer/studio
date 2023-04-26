@@ -85,11 +85,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                                    <div class="input-group input-group-dynamic">
-                                                        <label class="form-label">Foto</label>
-                                                        <input name="foto" id="foto" class="multisteps-form__input form-control" type="text"
-                                                            onfocus="focused(this)" onfocusout="defocused(this)">
-                                                    </div>
+                                                    <input type="file" class="form-control d-none" capture=environment id="input-file" accept="image/*" onchange="handleFileSelect(event)">
+                                                    <button class="btn btn-icon btn-3 btn-primary" type="button" onclick="document.getElementById('input-file').click()" id="upload-button">
+                                                        <span class="btn-inner--icon"><i class="material-icons pr-2" style="font-size: 20px; padding-right:10px">photo_camera_back</i></span>
+                                                    <span class="btn-inner--text">Escolher Foto</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div class="row mt-4">
@@ -131,6 +131,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 <script>
+     function handleFileSelect(event) {
+        var input = event.target;
+        var button = document.getElementById("upload-button");
+        if (input.files.length > 0) {
+            button.disabled = true;
+        }
+    }
     document.addEventListener("DOMContentLoaded", function(e) {
      
         document.querySelectorAll('#cidades_datalist').forEach(input => {

@@ -50,17 +50,17 @@
                                     <table class="table align-items-center mb-0" id="table-projetos">
                                         <tbody>
                                             @foreach ($atendimentos as $atendimento)
-                                            {{-- @php dd($atendimento) @endphp --}}
+                                            {{-- @php dd($atendimentos[1]) @endphp --}}
                                                 <tr>
                                                     <td>
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item border-0 flex-column align-items-start ps-0 py-0 mb-3">
                                                                 <div class="checklist-item checklist-item-primary ps-2 ms-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <h6 class="mb-0 text-dark">
+                                                                        <h5 class="mb-0 color-primary">
                                                                             {{-- <a href="{{route('admin-projetos-ver', $atendimento)}}">{{ $atendimento->nome_cliente }}</a> --}}
                                                                             <a href="#">{{ $atendimento->nome_cli }}</a>
-                                                                        </h6>
+                                                                        </h5>
                                                                         <div class="dropstart  float-lg-end ms-auto">
                                                                             {{-- <a href="{{route('admin-projetos-edit', $atendimento)}}" class="btn btn-icon btn-info">
                                                                                 <h5 class="btn-inner--icon"><i class="material-icons">edit</i></h5>
@@ -68,25 +68,25 @@
                                                                         </div>
                                                                     </div>
                                                                     <a href="{{route('view-atendimento',$atendimento->id)}}" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal">
-                                                                        <div class="col-md-2 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">Data</h6>
+                                                                        <div class="col-md-2">
+                                                                            <h6 class="text-xs mb-1 opacity-7">Data</h6>
                                                                             <h5 class="text-md text-bold opacity-9">
                                                                                 {{ date('d/m/Y', strtotime($atendimento->data_atendimento)) }}
                                                                             </h5>
                                                                         </div>
                                                                         <div class="col-md-3 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">Serviço</h6>
+                                                                            <h6 class="text-xs mb-1 opacity-7">Serviço</h6>
                                                                             <h5 class="text-md text-bold opacity-9">{{ $atendimento->servico}}</h5>
                                                                         </div>
                                                                         
                                                                         <div class="col-md-3 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">Valor</h6>
+                                                                            <h6 class="text-xs mb-1 opacity-7">Valor</h6>
                                                                             <h5 class="text-md text-bold  opacity-9">
                                                                                 R$ {{ number_format($atendimento->valor, 2, ',', '.') }}
                                                                             </h5>
                                                                         </div>
                                                                         <div class="col-md-3 text-dark">
-                                                                            <h6 class="text-xs mb-1 opacity-8">
+                                                                            <h6 class="text-xs mb-1 opacity-7">
                                                                                 @if($atendimento->nome_func)
                                                                                     Funcionário
                                                                                 @else

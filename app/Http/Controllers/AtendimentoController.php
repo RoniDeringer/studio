@@ -23,7 +23,7 @@ class AtendimentoController extends Controller
             'user_terc.nome as nome_terc',
             'atendimento.data as data_atendimento',
             'atendimento.valor as valor',
-            'atendimento.servico as servico',
+            'servico.nome as servico',
         )
             ->join('cliente AS cli', 'cli.id', 'atendimento.id_cliente')
             ->join('users AS user_cli', 'user_cli.id', 'cli.id_user')
@@ -31,6 +31,7 @@ class AtendimentoController extends Controller
             ->leftJoin('users AS user_func', 'func.id_user', 'user_func.id')
             ->leftJoin('terceirizado AS terc', 'terc.id', 'atendimento.id_terceirizado')
             ->leftJoin('users AS user_terc', 'terc.id_user', 'user_terc.id')
+            ->leftJoin('servico', 'servico.id', 'atendimento.servico')
             ->get();
 
 
@@ -46,7 +47,7 @@ class AtendimentoController extends Controller
             'user_terc.nome as nome_terc',
             'atendimento.data as data_atendimento',
             'atendimento.valor as valor',
-            'atendimento.servico as servico',
+            'servico.nome as servico',
         )
             ->join('cliente AS cli', 'cli.id', 'atendimento.id_cliente')
             ->join('users AS user_cli', 'user_cli.id', 'cli.id_user')
@@ -54,6 +55,7 @@ class AtendimentoController extends Controller
             ->leftJoin('users AS user_func', 'func.id_user', 'user_func.id')
             ->leftJoin('terceirizado AS terc', 'terc.id', 'atendimento.id_terceirizado')
             ->leftJoin('users AS user_terc', 'terc.id_user', 'user_terc.id')
+            ->leftJoin('servico', 'servico.id', 'atendimento.servico')
             ->where('user_cli.id', $user)
             ->get();
 

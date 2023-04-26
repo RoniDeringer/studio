@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="table-responsive">
-                            <div id="table-listagem-integrador_filter" class="dataTables_filter ">
+                            <div id="table-listagem-integrador_filter" class="dataTables_filter">
                             </div>
                             <table class="table align-items-center mb-0" id="table-listagem-integrador">
                                 <thead>

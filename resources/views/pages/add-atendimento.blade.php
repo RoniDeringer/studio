@@ -44,7 +44,7 @@
                                                                 <option value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input  name="cliente" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
+                                                        <input  name="cliente" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
                                                         <datalist  class="form-control" name="choices-cliente" id="choices-cliente" style="display: none">
                                                             @foreach ($data['clientes'] as $cliente)
                                                                 <option data-value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
@@ -61,7 +61,7 @@
                                                                 <option value="{{$profissional['id_user']}}">{{$profissional['nome']}}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input  name="profissional" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-profissional" id="profissionais_datalist">
+                                                        <input  name="profissional" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-profissional" id="profissionais_datalist">
                                                         <datalist  class="form-control" name="choices-profissional" id="choices-profissional" style="display: none">
                                                             @foreach ($data['profissionais'] as $profissional)
                                                                 <option data-value="{{$profissional['id_user']}}">{{$profissional['nome']}}</option>
@@ -80,7 +80,7 @@
                                                                 <option value="{{$servico['id']}}">{{$servico['nome']}}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input  name="servico" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-servico" id="servicos_datalist">
+                                                        <input  name="servico" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-servico" id="servicos_datalist">
                                                         <datalist  class="form-control" name="choices-servico" id="choices-servico" style="display: none">
                                                             @foreach ($data['servicos'] as $servico)
                                                                 <option data-value="{{$servico['id']}}">{{$servico['nome']}}</option>

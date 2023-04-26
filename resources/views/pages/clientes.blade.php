@@ -48,10 +48,8 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary font-weight-bolder opacity-7">Nome</th>
                                         <th class="text-uppercase text-secondary font-weight-bolder opacity-7">Cidade</th>
-                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Telefone</th>
-                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Aniversário</th>
-                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Total gasto</th>
-                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Nº Atendimentos</th>
+                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Último Atendimento</th>
+                                        <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Total Gasto</th>
                                         <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Ação</th>
                                     </tr>
                                 </thead>
@@ -60,20 +58,19 @@
                                         <tr>
                                             <td class="py-3"><a href="{{route('atendimentos-cliente',$cliente->id_user)}}">{{ $cliente->nome }}</a></td>
                                             <td class="py-3">{{ $cliente->cidade }}</td>
-                                            <td class="py-3">{{ $cliente->telefone }}</td>
                                             <td class="py-3">
-                                                @if ($cliente->data_nascimento)
-                                                    {{ date('d/m/Y', strtotime($cliente->data_nascimento)) }}
+                                                @if ($cliente->ultimo_atendimento)
+                                                    {{ date('d/m/Y', strtotime($cliente->ultimo_atendimento)) }}
                                                 @endif
                                             </td>
                                             <td class="py-3">
-                                                @if ($cliente->cidade)
-                                                    {{-- R$ {{ number_format($cliente->valor_total, 2, ',', '.') }} --}}
-                                                    R$ 500,00
+                                                @if ($cliente->total_gasto)
+                                                    <span class="badge badge-success">
+                                                        R$ {{ number_format($cliente->total_gasto, 2, ',', '.') }}
+                                                    </span>
                                                 @endif
                                             </td>
-                                            <td class="py-3">5</td>
-                                            <td class="text-sm">
+                                            <td class="py-3 text-sm">
                                                 <a href="{{route('view-cliente',$cliente->id_cliente)}}" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                                     <i class="material-icons text-secondary position-relative text-lg">visibility</i>
                                                 </a>

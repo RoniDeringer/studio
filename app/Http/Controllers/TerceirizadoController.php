@@ -102,8 +102,29 @@ class TerceirizadoController extends Controller
     }
 
     public function update (Request $request, $id_terceirizado){
-        dump('terceirizado');
-        dump($id_terceirizado);
-        dd($request);
+        try {
+            $terceirizado = Terceirizado::find($id_terceirizado);
+            $user = User::find($terceirizado->id_user);
+
+            $terceirizado->observacao = $request->observacao;
+            $terceirizado->funcao = $request->funcao;
+            if (!$imagem = $this->formattingImage($request->file('foto'))) {
+                return redirect()->back()->with(['type' => 'alert-danger', 'message' => 'Erro ao cadastrar funcionáro! Imagem inválida.']);
+            }
+            $terceirizado->foto = $imagem;
+
+            $user->nome = $request->nome;
+            $user->telefone = str_replace(array("(", ")", " ", "-"), "", $request->telefone);
+            $user->data_nascimento = (date('Y-m-d', strtotime($request->dt_nascimento)));
+            $user->cidade = $request->cidade;
+
+            $terceirizado->save();
+            $user->save();
+
+            return redirect()->route('terceirizados')->with(['type' => 'alert-success', 'message' => 'Terceirizado editado com sucesso.']);
+        } catch (Exception $ex) {
+            Log::error('Erro ao editar terceirizado: ' . $ex->getMessage());
+            return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
+        }
     }
 }

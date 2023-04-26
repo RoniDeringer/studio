@@ -80,12 +80,12 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div class="input-group input-group-dynamic @isset($terceirizado->funcao) focused is-focused @endisset">
                                                         <label class="form-label">Função</label>
-                                                        <input name="cargo" class="multisteps-form__input form-control" type="text" value="{{$terceirizado->funcao}}"
+                                                        <input name="funcao" class="multisteps-form__input form-control" type="text" value="{{$terceirizado->funcao}}"
                                                             onfocus="focused(this)" onfocusout="defocused(this)">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 px-3 mt-sm-0">
-                                                    <input type="file" class="form-control d-none" capture=environment id="input-file" accept="image/*" onchange="handleFileSelect(event)">
+                                                    <input type="file" class="form-control d-none" name="foto" capture=environment id="input-file" accept="image/*" onchange="handleFileSelect(event)">
                                                     <button class="btn btn-icon btn-3 btn-primary" type="button" onclick="document.getElementById('input-file').click()" id="upload-button">
                                                         <span class="btn-inner--icon"><i class="material-icons pr-2" style="font-size: 20px; padding-right:10px">photo_camera_back</i></span>
                                                     <span class="btn-inner--text">Escolher Foto</span>
@@ -101,7 +101,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="button-row d-flex justify-content-between mt-4">
+                                            <div class="button-row d-flex justify-content-between mt-3">
                                                 <a href="{{route('terceirizados')}}">
                                                     <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button">
                                                         Cancelar

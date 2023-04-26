@@ -31,7 +31,7 @@
                                             <span class="btn-inner--icon"><i class="material-icons">add</i></span>
                                         <span class="btn-inner--text">Funcionário</span>
                                         </button>
-                                    {{-- </a> --}}
+                                    </a>
                                 </div>
                             </div>
                         </div>

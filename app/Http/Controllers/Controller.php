@@ -9,7 +9,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    CONST CIDADES = [
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    const CIDADES = [
         'dona_emma' => 'Dona Emma',
         'presidente_getulio' => 'Presidente Getúlio',
         'ibirama' => 'Ibirama',
@@ -19,6 +21,39 @@ class Controller extends BaseController
         'salete' => 'Salete',
         'apiuna' => 'Apiúna',
     ];
+    
+    public function formattingImage($file)
+    {
+        if (!$this->validateImage($file)) {
+            return false;
+        }
+        if ($file->isValid()) {
+            $name = $file->getClientOriginalName();
+            $file->storeAs('public/imagens',  $name);
+        } else {
+            return false;
+        }
+        return $name;
+    }
 
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function validateImage($imagem)
+    {
+        $tamanhoMaximo = 8 * 1024 * 1024; // 8 MB em bytes
+        $extensoesValidas = array('jpg', 'jpeg', 'png');
+
+        if (!$imagem || !$imagem->isValid()) {
+            return false; // não há arquivo ou o upload falhou
+        }
+
+        $extensao = $imagem->getClientOriginalExtension();
+        if (!in_array($extensao, $extensoesValidas)) {
+            return false; // extensão inválida
+        }
+
+        if ($imagem->getSize() > $tamanhoMaximo) {
+            return false; // tamanho máximo excedido
+        }
+
+        return true; // arquivo válido
+    }
 }

@@ -85,7 +85,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                                    <input type="file" class="form-control d-none" capture=environment id="input-file" accept="image/*" onchange="handleFileSelect(event)">
+                                                    <input type="file" class="form-control d-none" name="foto" capture=environment id="input-file" accept="image/*" onchange="handleFileSelect(event)">
                                                     <button class="btn btn-icon btn-3 btn-primary" type="button" onclick="document.getElementById('input-file').click()" id="upload-button">
                                                         <span class="btn-inner--icon"><i class="material-icons pr-2" style="font-size: 20px; padding-right:10px">photo_camera_back</i></span>
                                                     <span class="btn-inner--text">Escolher Foto</span>

@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="multisteps-form mb-9">
+            <div class="multisteps-form mb-2">
 
                 <div class="row">
                     <div class="col-12 col-lg-8 mx-auto my-5">
@@ -67,7 +67,7 @@
                                                                 <option value="{{$key}}" @if($user->cidade == $value) selected @endif>{{$value}}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input value="{{$user->cidade}}" name="cidade" autocomplete="off" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cidade" id="cidades_datalist">
+                                                        <input value="{{$user->cidade}}" name="cidade" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cidade" id="cidades_datalist">
                                                         <datalist  class="form-control" name="choices-cidade" id="choices-cidade" style="display: none">
                                                             @foreach ($cidades as $key => $value)
                                                                 <option data-value="{{$key}}">{{$value}}</option>

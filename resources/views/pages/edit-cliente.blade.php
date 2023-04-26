@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="multisteps-form mb-9">
+            <div class="multisteps-form mb-2">
 
                 <div class="row">
                     <div class="col-12 col-lg-8 mx-auto my-5">
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="card-body">  
-                                <form action="{{route('cliente-edit', $cliente->id)}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 300px;">
+                                <form action="{{route('cliente-edit', $cliente->id)}}" method="post" enctype="multipart/form-data" class="multisteps-form__form" style="height: 250px;">
                                 @csrf
                                     <div class="multisteps-form__panel border-radius-xl bg-white js-active"
                                         data-animation="FadeIn">
@@ -59,19 +59,21 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                                    <div class="input-group input-group-static mb-4">
-                                                        <label for="cidade" class="ms-0">Cidade</label>
-                                                        <select class="form-control" id="cidade" name="cidade">
-                                                          <option value="dona_emma">Dona Emma</option>
-                                                          <option value="presidente_getulio">Presidente Getúlio</option>
-                                                          <option value="ibirama">Ibirama</option>
-                                                          <option value="rio_do_sul">Rio do Sul</option>
-                                                          <option value="Witmarsum">Witmarsum</option>
-                                                          <option value="vitor_meireles">Vitor Meireles</option>
-                                                          <option value="salete">Salete</option>
-                                                          <option value="apiuna">Apiúna</option>
+                                                    <div class="input-group input-group-dynamic @isset($user->cidade) focused is-focused @endisset">
+                                                        <label class="form-label">Cidade</label>
+                                                        <select name="cidade_id" class="form-control" style="display: none" id="cidade_id">
+                                                            <option value="" selected disabled></option>
+                                                            @foreach ($cidades as $key => $value)
+                                                                <option value="{{$key}}" @if($user->cidade == $value) selected @endif>{{$value}}</option>
+                                                            @endforeach
                                                         </select>
-                                                      </div>
+                                                        <input value="{{$user->cidade}}" name="cidade" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cidade" id="cidades_datalist">
+                                                        <datalist  class="form-control" name="choices-cidade" id="choices-cidade" style="display: none">
+                                                            @foreach ($cidades as $key => $value)
+                                                                <option data-value="{{$key}}">{{$value}}</option>
+                                                            @endforeach
+                                                        </datalist>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row mt-4">
@@ -82,7 +84,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="button-row d-flex justify-content-between mt-4">
+                                            <div class="button-row d-flex justify-content-between mt-3">
                                                 <a href="{{route('clientes')}}">
                                                     <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button">
                                                         Cancelar

@@ -22,7 +22,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <h5 class="mb-0">Funcionarios</h5>
+                                <h5 class="mb-0">Funcionários</h5>
                             </div>
                             <div class="col-md-6">
                                 <div class="d-flex justify-content-end">

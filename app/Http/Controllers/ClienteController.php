@@ -41,7 +41,6 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try {
-
             $user = new User();
             $user->nome = $request->nome;
             $user->telefone = str_replace(array("(", ")", " ", "-"), "", $request->telefone);
@@ -88,7 +87,7 @@ class ClienteController extends Controller
         //caso na tiver data selecionada?
 
 
-        return view('pages.edit-cliente', ['cliente' => $cliente, 'user'=> $user] );
+        return view('pages.edit-cliente', ['cliente' => $cliente, 'user'=> $user, 'cidades'=> self::CIDADES] );
     }
     
     public function update(Request $request, $id_cliente){

@@ -9,6 +9,7 @@ use App\Models\Servico;
 use App\Models\Terceirizado;
 use DateTime;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -65,7 +66,6 @@ class AtendimentoController extends Controller
 
     public function addAtendimento()
     {
-
         $funcionarios = Funcionario::select(
             'funcionario.id_user AS id_user',
             'users.nome AS nome'
@@ -129,25 +129,89 @@ class AtendimentoController extends Controller
         }
     }
 
-    public function view($atendimento){
-
+    public function view($atendimento)
+    {
         return view('pages.view-atendimento');
-
-
     }
 
-    public function update()
+    public function edit($id_atendimento)
     {
-        // $user = request()->user();
-        // $attributes = request()->validate([
-        //     'email' => 'required|email|unique:users,email,' . $user->id,
-        //     'name' => 'required',
-        //     'phone' => 'required|max:10',
-        //     'about' => 'required:max:150',
-        //     'location' => 'required'
-        // ]);
+        $atendimento = Atendimento::find($id_atendimento);
 
-        // auth()->user()->update($attributes);
-        // return back()->withStatus('Profile successfully updated.');
+        $funcionarios = Funcionario::select(
+            'funcionario.id AS id_funcionario',
+            'funcionario.id_user AS id_user',
+            'users.nome AS nome',
+            DB::raw('0 AS id_terceirizado')
+        )
+            ->join('users', 'users.id', 'funcionario.id_user')
+            ->get();
+
+        $terceirizados = Terceirizado::select(
+            'terceirizado.id AS id_terceirizado',
+            'terceirizado.id_user AS id_user',
+            'users.nome AS nome',
+            DB::raw('0 AS id_funcionario')
+        )
+            ->join('users', 'users.id', 'terceirizado.id_user')
+            ->get();
+        $clientes = Cliente::select(
+            'cliente.id',
+            'users.nome AS nome'
+        )
+            ->join('users', 'users.id', 'cliente.id_user')
+            ->get();
+        // dd(array_merge($funcionarios->toArray(), $terceirizados->toArray()));
+
+        $servicos = Servico::select("id", "nome")->get();
+        $data = [
+            'dataAtual' => date("d/m/Y"),
+            'profissionais' => array_merge($funcionarios->toArray(), $terceirizados->toArray()),
+            'clientes' => $clientes->toArray(),
+            'servicos' => $servicos->toArray(),
+        ];
+
+        return view('pages.edit-atendimento', ['data' => $data, 'atendimento' => $atendimento]);
+    }
+
+    public function update(Request $request, $id_atendimento)
+    {
+        try {
+            $atendimento = Atendimento::find($id_atendimento);
+            $atendimento->id_cliente = $request->cliente_id;
+            $atendimento->data = DateTime::createFromFormat('d/m/Y', $request->data);
+            $atendimento->valor = floatval(str_replace(',', '.', $request->valor));
+            $atendimento->servico = $request->servico_id;
+            $atendimento->observacao = $request->observacao;
+
+            if ($funcionario = Funcionario::where('id_user', $request->profissional_id)->first()) {
+                $atendimento->id_funcionario = $funcionario->id;
+            } else {
+                $terceirizado = Terceirizado::where('id_user', $request->profissional_id)->first();
+                $atendimento->id_terceirizado = $terceirizado->id;
+            }
+
+            $cliente = Cliente::find($request->cliente_id);
+
+            //se essa a data fornecida for mais recente que do ultimo atendimento eu atualizo o registro
+            if (DateTime::createFromFormat('d/m/Y', $request->data) > DateTime::createFromFormat('Y-m-d', $cliente->ultimo_atendimento)) {
+                $cliente->ultimo_atendimento = DateTime::createFromFormat('d/m/Y', $request->data);
+            }
+
+            $atendimento->save();
+            $cliente->save();
+
+            return redirect()->route('atendimentos')->with(['type' => 'alert-success', 'message' => 'Atendimento editado com sucesso!']);
+        } catch (Exception $ex) {
+            Log::error('Erro ao editar atendimento: ' . $ex->getMessage());
+            return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
+        }
+    }
+
+    function dataAtualMaiorQue(DateTime $data)
+    {
+        $agora = new DateTime();
+        $intervalo = $agora->diff($data);
+        return $intervalo->invert === 1; // Se o intervalo é negativo, a data atual é menor que a data fornecida
     }
 }

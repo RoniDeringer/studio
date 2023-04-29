@@ -67,7 +67,8 @@
                                                                             </a> --}}
                                                                         </div>
                                                                     </div>
-                                                                    <a href="{{route('view-atendimento',$atendimento->id)}}" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal">
+                                                                    {{-- <a href="{{route('view-atendimento',$atendimento->id)}}" class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal"> --}}
+                                                                    <div class="d-flex align-items-center ms-4 mt-3 ps-1 link-principal">
                                                                         <div class="col-md-2">
                                                                             <h6 class="text-xs mb-1 opacity-7">Data</h6>
                                                                             <h5 class="text-md text-bold opacity-9">
@@ -79,13 +80,13 @@
                                                                             <h5 class="text-md text-bold opacity-9">{{ $atendimento->servico}}</h5>
                                                                         </div>
                                                                         
-                                                                        <div class="col-md-3 text-dark">
+                                                                        <div class="col-md-2 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-7">Valor</h6>
                                                                             <h5 class="text-md text-bold  opacity-9">
                                                                                 R$ {{ number_format($atendimento->valor, 2, ',', '.') }}
                                                                             </h5>
                                                                         </div>
-                                                                        <div class="col-md-3 text-dark">
+                                                                        <div class="col-md-2 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-7">
                                                                                 @if($atendimento->nome_func)
                                                                                     Funcionário
@@ -101,7 +102,20 @@
                                                                                 @endif
                                                                             </h5>
                                                                         </div>
-                                                                    </a>
+                                                                        <div class="col-2"></div>
+                                                                        <div class="col-md-1 d-flex justify-content-between">
+                                                                            {{-- <h6 class="text-xs mb-1 opacity-7">Ações</h6> --}}
+                                                                            <a href="{{route('view-atendimento',$atendimento->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                                                                <i class="material-icons text-secondary position-relative text-lg">visibility</i>
+                                                                            </a>
+                                                                            <a href="{{route('editar-atendimento', $atendimento->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                                                                                <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
+                                                                            </a>
+                                                                            <a href="#" onclick="#" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                                                                <i class="material-icons text-secondary position-relative text-lg">delete</i> 
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <hr class="horizontal dark mt-4 mb-0">
                                                             </li>

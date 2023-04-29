@@ -80,7 +80,7 @@ class FuncionarioController extends Controller
     {
         $funcionario = Funcionario::find($id_funcionario);
         $user = User::where('id', $funcionario->id_user)->first();
-        $user->data_nascimento =  date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
+        $user->data_nascimento = date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
         //caso na tiver data selecionada?
 
         return view('pages.edit-funcionario', ['funcionario' => $funcionario, 'user' => $user, 'cidades' => self::CIDADES]);

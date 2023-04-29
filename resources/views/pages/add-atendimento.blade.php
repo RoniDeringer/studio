@@ -100,7 +100,7 @@
                                                     <div class="input-group input-group-dynamic is-filled">
                                                         <label class="form-label">Data</label>
                                                         <input required name="data" class="multisteps-form__input form-control" value="{{$data['dataAtual']}}" type="text"
-                                                            onfocus="focused(this)" onfocusout="defocused(this)">
+                                                            onfocus="focused(this)" onfocusout="defocused(this)" id="data">
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,6 +148,7 @@
 
     $(document).ready(function() {
         $('#valor').mask('000,00');
+        $('#data').mask('00/00/0000');
     });
 
     document.addEventListener("DOMContentLoaded", function(e) {

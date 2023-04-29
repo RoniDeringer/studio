@@ -23,6 +23,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\TerceirizadoController;
 
@@ -65,6 +66,9 @@ Route::get('funcionarios/adicionar',[FuncionarioController::class, 'addFuncionar
 Route::post('funcionarios/adicionar',[FuncionarioController::class, 'store'])->middleware('auth')->name('funcionario-store');
 Route::get('funcionarios/{funcionario}/edit',[FuncionarioController::class, 'edit'])->middleware('auth')->name('editar-funcionario');
 Route::post('funcionarios/{funcionario}/edit',[FuncionarioController::class, 'update'])->middleware('auth')->name('funcionario-edit');
+
+
+Route::get('servicos',[ServicoController::class, 'index'])->middleware('auth')->name('servicos');
 
 
 Route::get('verify', function () {

@@ -42,7 +42,7 @@ class TerceirizadoController extends Controller
             $count++;
         }
 
-        return view('pages.terceirizados',['terceirizados' => $terceirizados]);
+        return view('pages.terceirizado.terceirizados',['terceirizados' => $terceirizados]);
     }
 
     public function addTerceirizado()
@@ -81,24 +81,8 @@ class TerceirizadoController extends Controller
         $user = User::where('id', $terceirizado->id_user)->first();
         $user->data_nascimento =  date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
         //caso na tiver data selecionada?
-   
 
-
-        
-        // $user->nome
-        // $user->telefone 
-        // $user->cidade 
-        // $user->data_nascimento
-
-        // $terceirizado 
-        // $terceirizado->id_user 
-        // $terceirizado->funcao 
-        // $terceirizado->observacao
-        // $terceirizado->foto 
-      
-
-
-        return view('pages.edit-terceirizado', ['terceirizado' => $terceirizado, 'user'=> $user, 'cidades'=>self::CIDADES] );
+        return view('pages.terceirizado.edit-terceirizado', ['terceirizado' => $terceirizado, 'user'=> $user, 'cidades'=>self::CIDADES] );
     }
 
     public function update (Request $request, $id_terceirizado){

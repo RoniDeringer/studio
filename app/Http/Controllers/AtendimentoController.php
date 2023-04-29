@@ -36,7 +36,7 @@ class AtendimentoController extends Controller
             ->get();
 
 
-        return view('pages.atendimentos', ['atendimentos' => $atendimentos]);
+        return view('pages.atendimento.atendimentos', ['atendimentos' => $atendimentos]);
     }
     public function viewCliente($user)
     {
@@ -61,7 +61,7 @@ class AtendimentoController extends Controller
             ->get();
 
 
-        return view('pages.atendimentos', ['atendimentos' => $atendimentos]);
+        return view('pages.atendimento.atendimentos', ['atendimentos' => $atendimentos]);
     }
 
     public function addAtendimento()
@@ -96,7 +96,7 @@ class AtendimentoController extends Controller
             'servicos' => $servicos->toArray(),
         ];
 
-        return view('pages.add-atendimento', ['data' => $data]);
+        return view('pages.atendimento.add-atendimento', ['data' => $data]);
     }
 
     public function store(Request $request)
@@ -131,7 +131,7 @@ class AtendimentoController extends Controller
 
     public function view($atendimento)
     {
-        return view('pages.view-atendimento');
+        return view('pages.atendimento.view-atendimento');
     }
 
     public function edit($id_atendimento)
@@ -161,9 +161,9 @@ class AtendimentoController extends Controller
         )
             ->join('users', 'users.id', 'cliente.id_user')
             ->get();
-        // dd(array_merge($funcionarios->toArray(), $terceirizados->toArray()));
 
         $servicos = Servico::select("id", "nome")->get();
+
         $data = [
             'dataAtual' => date("d/m/Y"),
             'profissionais' => array_merge($funcionarios->toArray(), $terceirizados->toArray()),
@@ -171,7 +171,7 @@ class AtendimentoController extends Controller
             'servicos' => $servicos->toArray(),
         ];
 
-        return view('pages.edit-atendimento', ['data' => $data, 'atendimento' => $atendimento]);
+        return view('pages.atendimento.edit-atendimento', ['data' => $data, 'atendimento' => $atendimento]);
     }
 
     public function update(Request $request, $id_atendimento)
@@ -206,12 +206,5 @@ class AtendimentoController extends Controller
             Log::error('Erro ao editar atendimento: ' . $ex->getMessage());
             return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
         }
-    }
-
-    function dataAtualMaiorQue(DateTime $data)
-    {
-        $agora = new DateTime();
-        $intervalo = $agora->diff($data);
-        return $intervalo->invert === 1; // Se o intervalo é negativo, a data atual é menor que a data fornecida
     }
 }

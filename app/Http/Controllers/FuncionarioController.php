@@ -42,12 +42,12 @@ class FuncionarioController extends Controller
             $funcionarios[$count]->rendimento = $atendimentos->valor_total;
             $count++;
         }
-        return view('pages.funcionarios', ['funcionarios' => $funcionarios]);
+        return view('pages.funcionario.funcionarios', ['funcionarios' => $funcionarios]);
     }
 
     public function addFuncionario()
     {
-        return view('pages.add-funcionario', ['cidades' => self::CIDADES]);
+        return view('pages.funcionario.add-funcionario', ['cidades' => self::CIDADES]);
     }
 
     public function store(Request $request)
@@ -83,7 +83,7 @@ class FuncionarioController extends Controller
         $user->data_nascimento = date("d/m/Y", date_create_from_format("Y-m-d", $user->data_nascimento)->getTimestamp());
         //caso na tiver data selecionada?
 
-        return view('pages.edit-funcionario', ['funcionario' => $funcionario, 'user' => $user, 'cidades' => self::CIDADES]);
+        return view('pages.funcionario.edit-funcionario', ['funcionario' => $funcionario, 'user' => $user, 'cidades' => self::CIDADES]);
     }
 
     public function update(Request $request, $id_funcionario)

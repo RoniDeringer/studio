@@ -38,12 +38,12 @@ class ClienteController extends Controller
             $clientes[$i]->total_gasto = $atendimentos->valor_total;
         }
 
-        return view('pages.clientes', ['clientes' => $clientes]);
+        return view('pages.cliente.clientes', ['clientes' => $clientes]);
     }
 
     public function addCliente()
     {
-        return view('pages.add-cliente', ['cidades' => self::CIDADES]);
+        return view('pages.cliente.add-cliente', ['cidades' => self::CIDADES]);
     }
 
     public function store(Request $request)
@@ -95,7 +95,7 @@ class ClienteController extends Controller
         //caso na tiver data selecionada?
 
 
-        return view('pages.edit-cliente', ['cliente' => $cliente, 'user' => $user, 'cidades' => self::CIDADES]);
+        return view('pages.cliente.edit-cliente', ['cliente' => $cliente, 'user' => $user, 'cidades' => self::CIDADES]);
     }
 
     public function update(Request $request, $id_cliente)
@@ -159,7 +159,7 @@ class ClienteController extends Controller
         dump($cliente);
         dump($atendimentos);
         dd('fim');
-        return view('pages.view-cliente', [
+        return view('pages.cliente.view-cliente', [
             'cliente' => $cliente,
             'atendimentos' => $atendimentos,
         ]);

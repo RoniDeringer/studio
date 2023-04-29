@@ -98,58 +98,54 @@
                                                                 @endforeach
                                                             </datalist>
                                                         </div>
-
-
-
                                                     @endif
                                                 </div>
-                                                <div class="row mt-4">
-                                                    <div class="col-12 col-sm-4">
-                                                        <div class="input-group input-group-dynamic @isset($atendimento->servico) focused is-focused @endisset">
-                                                            <label class="form-label" for="servico_id">Serviço</label>
-                                                            <select name="servico_id" class="form-control" style="display: none" id="servico_id">
-                                                                <option value="" disabled></option>
-                                                                @foreach ($data['servicos'] as $servico)
-                                                                    <option value="{{$servico['id']}}" @if($atendimento->servico == $servico['id']) selected @endif>{{$servico['nome']}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                                @foreach ($data['servicos'] as $servico)
-                                                                    @if($atendimento->servico == $servico['id'])
-                                                                        <input value="{{$servico['nome']}}" name="servico" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-servico" id="servicos_datalist">
-                                                                    @endif
-                                                                @endforeach
-                                                            <datalist  class="form-control" name="choices-servico" id="choices-servico" style="display: none">
-                                                                @foreach ($data['servicos'] as $servico)
-                                                                    <option data-value="{{$servico['id']}}">{{$servico['nome']}}</option>
-                                                                @endforeach
-                                                            </datalist>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-4">
-                                                        <div class="input-group input-group-dynamic @isset($atendimento->valor) focused is-focused @endisset">
-                                                            <label class="form-label">Valor</label>
-                                                            <input name="valor" value="{{ number_format($atendimento->valor, 2, ',', '.') }}" id="valor" class="multisteps-form__input form-control" type="text"
-                                                                onfocus="focused(this)" onfocusout="defocused(this)">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-4">
-                                                        <div class="input-group input-group-dynamic @isset($atendimento->data) focused is-focused @endisset">
-                                                            <label class="form-label">Data</label>
-                                                            <input required name="data" value="{{ date('d/m/Y', strtotime($atendimento->data)) }}" class="multisteps-form__input form-control" type="text"
-                                                                onfocus="focused(this)" onfocusout="defocused(this)" id="data">
-                                                        </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="input-group input-group-dynamic @isset($atendimento->servico) focused is-focused @endisset">
+                                                        <label class="form-label" for="servico_id">Serviço</label>
+                                                        <select name="servico_id" class="form-control" style="display: none" id="servico_id">
+                                                            <option value="" disabled></option>
+                                                            @foreach ($data['servicos'] as $servico)
+                                                                <option value="{{$servico['id']}}" @if($atendimento->servico == $servico['id']) selected @endif>{{$servico['nome']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                            @foreach ($data['servicos'] as $servico)
+                                                                @if($atendimento->servico == $servico['id'])
+                                                                    <input value="{{$servico['nome']}}" name="servico" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-servico" id="servicos_datalist">
+                                                                @endif
+                                                            @endforeach
+                                                        <datalist  class="form-control" name="choices-servico" id="choices-servico" style="display: none">
+                                                            @foreach ($data['servicos'] as $servico)
+                                                                <option data-value="{{$servico['id']}}">{{$servico['nome']}}</option>
+                                                            @endforeach
+                                                        </datalist>
                                                     </div>
                                                 </div>
-                                                <div class="row mt-4">
-                                                    <div class="col-12">
-                                                        <div class="input-group input-group-dynamic @isset($atendimento->observacao) focused is-focused @endisset">
-                                                            <textarea name="observacao" class="multisteps-form__textarea form-control" rows="2"
-                                                                placeholder="Observação">{{$atendimento->observacao}}</textarea>
-                                                        </div>
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="input-group input-group-dynamic @isset($atendimento->valor) focused is-focused @endisset">
+                                                        <label class="form-label">Valor</label>
+                                                        <input name="valor" value="{{ number_format($atendimento->valor, 2, ',', '.') }}" id="valor" class="multisteps-form__input form-control" type="text"
+                                                            onfocus="focused(this)" onfocusout="defocused(this)">
                                                     </div>
                                                 </div>
-
-
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="input-group input-group-dynamic @isset($atendimento->data) focused is-focused @endisset">
+                                                        <label class="form-label">Data</label>
+                                                        <input required name="data" value="{{ date('d/m/Y', strtotime($atendimento->data)) }}" class="multisteps-form__input form-control" type="text"
+                                                            onfocus="focused(this)" onfocusout="defocused(this)" id="data">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <div class="input-group input-group-dynamic @isset($atendimento->observacao) focused is-focused @endisset">
+                                                        <textarea name="observacao" class="multisteps-form__textarea form-control" rows="2"
+                                                            placeholder="Observação">{{$atendimento->observacao}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <hr class="mt-5">
                                             <div class="button-row d-flex justify-content-between mt-1">
                                                 <a href="{{route('atendimentos')}}">

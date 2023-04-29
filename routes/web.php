@@ -69,6 +69,7 @@ Route::post('funcionarios/{funcionario}/edit',[FuncionarioController::class, 'up
 
 
 Route::get('servicos',[ServicoController::class, 'index'])->middleware('auth')->name('servicos');
+Route::post('servicos',[ServicoController::class, 'store'])->middleware('auth')->name('add-servico');
 
 
 Route::get('verify', function () {

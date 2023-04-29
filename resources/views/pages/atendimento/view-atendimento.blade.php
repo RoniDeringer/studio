@@ -19,6 +19,7 @@
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-dark shadow text-center border-radius-xl mt-n4 float-start">
                                 <i class="material-icons opacity-10">account_circle</i>
+                                <i class="material-icons opacity-10">display_settings</i>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

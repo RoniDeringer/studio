@@ -119,8 +119,8 @@
     function modalDelete(id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-                confirmButton: 'btn btn-danger ms-3',
-                cancelButton: 'btn btn-secondary' // adiciona uma margem de 3px para a direita
+                confirmButton: 'btn btn-success ms-3',
+                cancelButton: 'btn btn-outline-danger'
             },
             buttonsStyling: false
         })

@@ -34,7 +34,7 @@
                                     
                                     <a href="{{route('servicos')}}" style="padding-left:5px">
                                         <button class="justify-content-end btn btn-outline-primary mb-0 mt-sm-0 mt-1" data-type="servicos" type="button"
-                                            name="button">Servicos
+                                            name="button">Serviços
                                         </button>
                                     </a>
                                 </div>

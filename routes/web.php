@@ -70,6 +70,7 @@ Route::post('funcionarios/{funcionario}/edit',[FuncionarioController::class, 'up
 
 Route::get('servicos',[ServicoController::class, 'index'])->middleware('auth')->name('servicos');
 Route::post('servicos',[ServicoController::class, 'store'])->middleware('auth')->name('add-servico');
+Route::delete('servicos/{id}', [ServicoController::class, 'destroy'])->middleware('auth')->name('servico-destroy');
 
 
 Route::get('verify', function () {

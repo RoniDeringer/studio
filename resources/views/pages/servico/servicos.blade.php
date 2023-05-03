@@ -59,7 +59,7 @@
                                                         @endif
                                                     </td>
                                                     
-                                                    <td class="py-3">{{$servico->id}} - {{ $servico->nome }}</td>
+                                                    <td class="py-3">{{ $servico->nome }}</td>
                                                     <td class="py-3 text-sm">
                                                         <a style="cursor: pointer;" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                                             <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>

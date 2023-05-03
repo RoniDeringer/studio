@@ -156,9 +156,9 @@ class ClienteController extends Controller
             ->count();
         $atendimentos->total_atendimentos = $total_atendimentos;
 
-        dump($cliente);
-        dump($atendimentos);
-        dd('fim');
+        // dump($cliente);
+        // dump($atendimentos);
+        // dd('fim');
         return view('pages.cliente.view-cliente', [
             'cliente' => $cliente,
             'atendimentos' => $atendimentos,

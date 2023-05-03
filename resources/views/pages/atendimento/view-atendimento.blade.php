@@ -19,33 +19,22 @@
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-dark shadow text-center border-radius-xl mt-n4 float-start">
                                 <i class="material-icons opacity-10">account_circle</i>
-                                <i class="material-icons opacity-10">display_settings</i>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6 class="mb-0">Cliente</h6>
                                 </div>
                                 <div class="col-md-6 align-items-center text-end">
-                                    <p class="text-sm mb-0 text-capitalize">Total gasto</p>
+                                    <p class="text-sm mb-0 text-capitalize">Idade</p>
                                 <h5 class="mb-0">
-                                    R$ 1500,00
+                                    {{$cliente->idade}} anos
                                 </h5>
                                 </div>
                             </div>
                         </div>
                         <div class="col-10 mx-auto">
-                            <a href="#"><h2 class="mb-0 text-primary">Roni Deringer</h2></a>
-                            <span class="font-weight-bolder">20 anos</span>
-                        </div>
-                        
-                        <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">
-                                    25
-                                </span>
-                                atendimentos
-                            </p>
+                            <a href="#"><h2 class="mb-0 text-primary">{{$cliente->nome}}</h2></a>
+                            <span class="font-weight-bolder">{{$cliente->cidade}}</span>
                         </div>
                     </div>
                 </div>
@@ -59,29 +48,43 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="mb-0">Funcionário</h6>
+                                    <h6 class="mb-0">
+                                        @if($funcionario)
+                                            Funcionário
+                                        @else
+                                            Terceirizado
+                                        @endif
+                                    </h6>
                                 </div>
                                 <div class="col-md-6 align-items-center text-end">
-                                    <p class="text-sm mb-0 text-capitalize">Total ganho</p>
+                                    <p class="text-sm mb-0 text-capitalize">
+                                        @if($funcionario)
+                                            Cargo
+                                        @else
+                                            Função
+                                        @endif
+                                    </p>
                                 <h5 class="mb-0">
-                                    R$ 4520,00
+                                    @if($funcionario)
+                                        {{$funcionario->cargo}}
+                                    @else
+                                        {{$terceirizado->funcao}}
+                                    @endif
                                 </h5>
                                 </div>
                             </div>
                         </div>
                         <div class="col-10 mx-auto">
-                            <a href="#"><h2 class="mb-0 text-primary">Eduarda Iomes</h2></a>
+                            <a href="#">
+                                <h2 class="mb-0 text-primary">
+                                    @if($funcionario)
+                                        {{$funcionario->nome}}
+                                    @else
+                                        {{$terceirizado->nome}}
+                                    @endif
+                                </h2>
+                            </a>
                             <span class="font-weight-bolder">19 anos</span>
-                        </div>
-                        
-                        <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">
-                                    25
-                                </span>
-                                atendimentos
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -90,53 +93,34 @@
                 <div class="card">
                     {{-- <span class="badge rounded-pill bg-dark w-30 mt-n2 mx-auto">Atendimento</span> --}}
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row">   
                             <div class="col-10 mx-auto">
                                 <div class="d-flex justify-content-center">
-                                    <h2 class="text-primary">Corte de Cabelo</h2>
+                                    <h2 class="text-primary">{{$servico->nome}}</h2>
                                 </div>
                                 <br>
 
                                 <div class="mt-1 d-flex justify-content-between">
                                     <div class="col-6">
                                         <span class="badge badge-success">Valor</span>
-                                        <h5 class="pt-2">R$ 250,00</h5>
+                                        <h5 class="pt-2">R$ {{ number_format($atendimento->valor, 2, ',', '.') }}</h5>
                                     </div>
                                     <div class="col-6">
                                         <div class="d-flex justify-content-end"><span class="badge badge-info">Data</span></div>
-                                        <div class="d-flex justify-content-end"><span class="text-xs pt-2">Maio: Terça-Feira</span></div>
-                                        <div class="d-flex justify-content-end"><h5 >12/04/2023</h5></div>
+                                        <div class="d-flex justify-content-end"><span class="text-xs pt-2">{{$atendimento->dataFormatada}}</span></div>
+                                        <div class="d-flex justify-content-end"><h5 >{{$atendimento->data}}</h5></div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="mt-4 font-weight-bolder">Observação</span>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <div class="col-4 text-xs">
-                                        The most beautiful curves of this swivel stool
-                                        adds an elegant touch to any environment
+                                @if($atendimento->observacao)
+                                    <div class="d-flex justify-content-end">
+                                        <span class="mt-4 font-weight-bolder">Observação</span>
                                     </div>
-                                </div>
-                                
-                                <div class="row mt-4">
-                                    <div class="col-lg-5 mt-lg-0 mt-2">
-                                        <label class="ms-0">Frame Material</label>
-                                        <div class="choices" data-type="select-one" tabindex="0" role="listbox"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <div class="choices__inner"><select class="form-control choices__input"
-                                                    name="choices-material" id="choices-material" hidden="" tabindex="-1"
-                                                    data-choice="active">
-                                                    <option value="Choice 1">Wood</option>
-                                                </select>
-                                                <div class="choices__list choices__list--single">
-                                                    <div class="choices__item choices__item--selectable" data-item=""
-                                                        data-id="1" data-value="Choice 1" data-custom-properties="null"
-                                                        aria-selected="true">Wood</div>
-                                                </div>
-                                            </div>
+                                    <div class="d-flex justify-content-end">
+                                        <div class="col-4 text-xs">
+                                            {{$atendimento->observacao}}
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

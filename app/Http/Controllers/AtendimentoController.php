@@ -7,8 +7,10 @@ use App\Models\Cliente;
 use App\Models\Funcionario;
 use App\Models\Servico;
 use App\Models\Terceirizado;
+use Carbon\Carbon;
 use DateTime;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -131,7 +133,83 @@ class AtendimentoController extends Controller
 
     public function view($atendimento)
     {
-        return view('pages.atendimento.view-atendimento');
+
+
+        try {
+            $atendimento = Atendimento::find($atendimento);
+           
+            Carbon::setLocale('pt_BR');
+            $date = Carbon::parse($atendimento->data);
+            $atendimento->dataFormatada = $date->translatedFormat('F') . ': ' . $date->translatedFormat('l');
+            $atendimento->data = Carbon::parse($atendimento->data)->format('d/m/Y');
+
+            
+            $servico = Servico::find($atendimento->servico);
+
+            $cliente = Cliente::select(
+                'users.nome',
+                'users.telefone',
+                'users.cidade',
+                'users.data_nascimento',
+                'cliente.observacao',
+            )
+                ->join('users', 'users.id', 'cliente.id_user')
+                ->where('cliente.id', $atendimento->id_cliente)
+                ->first();
+
+
+            $idade = (Carbon::createFromFormat('Y-m-d', $cliente->data_nascimento))->age;
+            $cliente->idade = $idade;
+
+            if ($atendimento->id_funcionario) {
+                $funcionario = Funcionario::select(
+                    'users.nome',
+                    'users.telefone',
+                    'users.cidade',
+                    'users.data_nascimento',
+                    'funcionario.cargo',
+                    'funcionario.foto',
+                )
+                    ->join('users', 'users.id', 'funcionario.id_user')
+                    ->where('funcionario.id', $atendimento->id_funcionario)
+                    ->first();
+                $terceirizado = [];
+            } else {
+                $terceirizado = Terceirizado::select(
+                    'users.nome',
+                    'users.telefone',
+                    'users.cidade',
+                    'users.data_nascimento',
+                    'terceirizado.funcao',
+                    'terceirizado.observacao',
+                    'terceirizado.foto',
+                )
+                    ->join('users', 'users.id', 'terceirizado.id_user')
+                    ->where('terceirizado.id', $atendimento->id_terceirizado)
+                    ->first();
+                $funcionario = [];
+            }
+
+            return view('pages.atendimento.view-atendimento')->with(
+                [
+                    'atendimento' => $atendimento,
+                    'servico' => $servico,
+                    'cliente' => $cliente,
+                    'funcionario' => $funcionario,
+                    'terceirizado' => $terceirizado,
+                ]
+            );
+        } catch (Exception $ex) {
+            return back()->with(['type' => 'alert-danger', 'message' => 'Não foi possível achar o atendimento.']);
+        }
+
+        //cliente
+
+        //profissional
+
+        //atendimento / servico
+
+        // return view('pages.atendimento.view-atendimento');
     }
 
     public function edit($id_atendimento)

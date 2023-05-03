@@ -130,7 +130,7 @@
 
 
 
-                                <td class="py-3">
+                                {{-- <td class="py-3">
                                     @if ($integrador->valor_total)
                                         R$ {{ number_format($integrador->valor_total, 2, ',', '.') }}
                                     @endif
@@ -139,7 +139,7 @@
                                     @if ($integrador->data_recente)
                                         {{ date('d/m/Y', strtotime($integrador->data_recente)) }}
                                     @endif
-                                </td>
+                                </td> --}}
 
 
 

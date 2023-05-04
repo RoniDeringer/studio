@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -68,21 +69,18 @@ class ClienteController extends Controller
         }
     }
 
-    public function destroy($id_cliente)
+    public function destroy($id)
     {
         try {
-            $cliente = Cliente::find($id_cliente);
-            $user = User::where('id', $cliente->id_user)->first();
+            $cliente = Cliente::findOrFail($id);
+            $user = User::findOrFail($cliente->id_user);
             if ($cliente && $user) {
-                // $cliente->delete();
-                // $user->delete();
-                return redirect()->back()->with(['type' => 'alert-success', 'message' => 'Cliente excluído com sucesso.']);
+                $cliente->delete();
+                $user->delete();
+                return response()->json('Cliente excluído com sucesso', 200);
             }
-            Log::error('Erro ao excluir cliente! Cliente ou User não encontrado.');
-            return redirect()->back()->with(['type' => 'alert-danger', 'message' => 'Erro ao excluir cliente.']);
-        } catch (Exception $ex) {
-            Log::error('Erro ao excluir cliente! Erro: ' . $ex->getMessage());
-            return redirect()->back()->with(['type' => 'alert-danger', 'message' => 'Erro ao excluir cliente!']);
+        } catch (QueryException $ex) {
+            return response()->json($ex->getMessage(), 204);
         }
     }
 
@@ -170,12 +168,7 @@ class ClienteController extends Controller
             ->limit(5)
             ->get();
 
-
-
-        // dump($cliente);
-        // dump($atendimentos)/;
-        // dd('fim');
-        return view('pages.cliente.view-cliente', [
+            return view('pages.cliente.view-cliente', [
             'cliente' => $cliente,
             'atendimentos' => $atendimentos,
             'ultimosAtendimentos' => $ultimosAtendimentos,

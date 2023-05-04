@@ -115,19 +115,18 @@
         });
     });
 
-    // var form_rejeitar = document.getElementById('alert-delete');
-    function modalDelete(id) {
+    function modalDelete($id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-                confirmButton: 'btn btn-success ms-3',
-                cancelButton: 'btn btn-outline-danger'
+                confirmButton: 'btn btn-danger ms-3',
+                cancelButton: 'btn btn-outline-secondary'
             },
             buttonsStyling: false
         })
 
         swalWithBootstrapButtons.fire({
             title: 'Deseja mesmo excluir?',
-            text: "Você excluirá todos os registros de atendimentos desse cliente!",
+            text: "Todos os atendimentos desse cliente irão ficar com registros vazios",
             icon: 'error',
             showCancelButton: true,
             confirmButtonText: 'Excluir',
@@ -135,7 +134,34 @@
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "{{ route('cliente-destroy', ':id') }}".replace(':id', id);
+                const inputValor = result.value;
+                fetch('{{ route("cliente-destroy", ":id") }}'.replace(':id', $id), {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Cliente excluído!',
+                        })
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    }
+                    console.log('Erro na solicitação de excluír cliente.')
+                })
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                    })
+                });
             }
         })
     }

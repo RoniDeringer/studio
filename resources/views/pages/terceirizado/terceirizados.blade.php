@@ -118,7 +118,6 @@
         });
     });
 
-    // var form_rejeitar = document.getElementById('alert-delete');
     function modalDelete($id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {

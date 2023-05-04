@@ -62,8 +62,10 @@
                                     <p class="text-sm mb-0 text-capitalize">
                                         @if($funcionario)
                                             Cargo
-                                        @else
+                                        @elseif($terceirizado)
                                             Função
+                                        @else
+                                            Cargo/Função
                                         @endif
                                     </p>
                                 <h5 class="mb-0">

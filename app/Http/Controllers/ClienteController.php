@@ -135,15 +135,17 @@ class ClienteController extends Controller
             'users.telefone',
             'users.cidade',
             'cliente.ultimo_atendimento',
+            'cliente.observacao',
             'users.data_nascimento',
         )
             ->join('users', 'users.id', 'cliente.id_user')
             ->where('cliente.id', $cliente_id)
             ->first();
-
-        $idade = (Carbon::createFromFormat('Y-m-d', $cliente->data_nascimento))->age;
-        $cliente->idade = $idade;
-
+        if ($cliente->data_nascimento) {
+            $idade = (Carbon::createFromFormat('Y-m-d', $cliente->data_nascimento))->age;
+            $cliente->idade = $idade;
+            $cliente->dt_nascimento = Carbon::parse($cliente->data_nascimento)->format('d/m/Y');
+        }
         $atendimentos = Atendimento::select(
             DB::raw('SUM(atendimento.valor) as valor_total')
         )
@@ -156,12 +158,27 @@ class ClienteController extends Controller
             ->count();
         $atendimentos->total_atendimentos = $total_atendimentos;
 
+        $ultimosAtendimentos = Atendimento::select(
+            'atendimento.valor',
+            DB::raw('DATE_FORMAT(atendimento.data, "%d/%m/%Y") as data'),
+            'atendimento.id AS id_atendimento',
+            'servico.nome AS servico',
+        )
+            ->join('servico', 'servico.id', 'atendimento.servico')
+            ->where('atendimento.id_cliente', $cliente_id)
+            ->orderBy('data', 'desc')
+            ->limit(5)
+            ->get();
+
+
+
         // dump($cliente);
-        // dump($atendimentos);
+        // dump($atendimentos)/;
         // dd('fim');
         return view('pages.cliente.view-cliente', [
             'cliente' => $cliente,
             'atendimentos' => $atendimentos,
+            'ultimosAtendimentos' => $ultimosAtendimentos,
         ]);
     }
 }

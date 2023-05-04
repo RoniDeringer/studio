@@ -11,111 +11,104 @@
 @endsection
 @section('content')
 
-    <div class="col-10 mx-auto">
-        <div class="row">
-            <div class="col-6">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header p-3 pt-2">
-                            <div class="icon icon-lg icon-shape bg-gradient-dark shadow text-center border-radius-xl mt-n4 float-start">
-                                <i class="material-icons opacity-10">paid</i>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h6 class="mb-0">Faturamento</h6>
-                                </div>
-                                <div class="col-md-6 align-items-center text-end">
-                                    <p class="text-sm mb-0 text-capitalize">Total Atendimentos</p>
-                                <h5 class="mb-0">
-                                    12
-                                </h5>
-                                </div>
-                            </div>
+    <div class="row justify-content-center">
+        {{-- <div class="col-10 mx-auto"> --}}
+        {{-- <div class=""> --}}
+            <div class="col-3 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div
+                            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="material-icons opacity-10">receipt_long</i>
                         </div>
-                        <div class="col-10 mx-auto">
-                            <a href="#"><h2 class="mb-0 text-primary">R$ 1212,00</h2></a>
-                            <span class="font-weight-bolder">20 anos</span>
-                        </div>
-                        
-                        <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">
-                                    25
-                                </span>
-                                atendimentos
-                            </p>
+                        <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">Atendimentos</p>
+                            <h2 class="mb-2">{{$atendimentos->total_atendimentos}}</h2>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="col-12 mt-5">
-                    <div class="card">
-                        <div class="card-header p-3 pt-2">
-                            <div class="icon icon-lg icon-shape bg-gradient-dark shadow text-center border-radius-xl mt-n4 float-start">
-                                <i class="material-icons opacity-10">account_circle</i>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h6 class="mb-0">Funcionário</h6>
-                                </div>
-                                <div class="col-md-6 align-items-center text-end">
-                                    <p class="text-sm mb-0 text-capitalize">Total ganho</p>
-                                <h5 class="mb-0">
-                                    R$ 4520,00
-                                </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-10 mx-auto">
-                            <a href="#"><h2 class="mb-0 text-primary">Eduarda Iomes</h2></a>
-                            <span class="font-weight-bolder">19 anos</span>
-                        </div>
-                        
-                        <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">
-                                    25
-                                </span>
-                                atendimentos
-                            </p>
-                        </div>
+                    <hr class="dark horizontal my-0">
+                    <div class="card-footer p-3">
+                        {{-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+2 </span>nesse mês</p> --}}
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-3 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div
+                            class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="material-icons opacity-10">payments</i>
+                        </div>
+                        <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">Faturamento</p>
+                            <h2 class="mb-2">R$ {{ number_format($atendimentos->valor_total, 2, ',', '.') }}</h2>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <div class="card-footer p-3">
+                        {{-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">R$ 1.245,90 </span>nesse mês</p> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div
+                            class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">New Clients</p>
+                            <h2 class="mb-0">3,462</h2>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <div class="card-footer p-3">
+                        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than
+                            yesterday</p>
+                    </div>
+                </div>
+            {{-- </div> --}}
+        </div>
+    </div>
+
+    <div class="col-9  mt-6 mx-auto">
+        <div class="row">
+            <div class="col-8">
                 <div class="card">
                     {{-- <span class="badge rounded-pill bg-dark w-30 mt-n2 mx-auto">Atendimento</span> --}}
                     <div class="card-body">
                         <div class="row">
                             <div class="col-10 mx-auto">
                                 <div class="d-flex justify-content-center">
-                                    <h1 class="text-primary">Roni Deringer</h1>
+                                    <h1 class="text-primary">{{$cliente->nome}}</h1>
                                 </div>
+                                <hr class="dark horizontal my-0">
                                 <br>
 
                                 <div class="mt-1 d-flex justify-content-between">
                                     <div class="col-6">
-                                        <span class="badge badge-primary">Telefone</span>
-                                        <h5 class="pt-2">(47)222222</h5>
+                                        @if($cliente->telefone)
+                                            <span class="badge badge-primary">Telefone</span>
+                                            <h5 class="pt-2">
+                                                {{ '(' . substr($cliente->telefone, 0, 2) . ') ' . substr($cliente->telefone, 2, 4) . '-' . substr($cliente->telefone, 6) }}
+                                            </h5>
+                                        @endif
                                     </div>
                                     <div class="col-6">
-                                        <div class="d-flex justify-content-end"><span class="badge badge-primary">Idade</span></div>
-                                        <div class="d-flex justify-content-end"><h5 class="mb-0 mt-1">20 anos</h5></div>
-                                        <div class="d-flex justify-content-end"><span class="text-xs">06/08/2002</span></div>
+                                        @if($cliente->idade)
+                                            <div class="d-flex justify-content-end"><span class="badge badge-primary">Idade</span></div>
+                                            <div class="d-flex justify-content-end"><h5 class="mb-0 mt-1">{{$cliente->idade}} anos</h5></div>
+                                            <div class="d-flex justify-content-end"><span class="text-xs">{{$cliente->dt_nascimento}}</span></div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mt-5 d-flex justify-content-between">
                                     <div class="col-6">
-                                        <span class="badge badge-primary">Cidade</span>
-                                        <h5 class="pt-2">Presidente Getúlio</h5>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="d-flex justify-content-end"><span class="badge badge-primary">Último Atendimento</span></div>
-                                        <div class="d-flex justify-content-end"><span class="text-xs pt-2">Maio: Terça-Feira</span></div>
-                                        <div class="d-flex justify-content-end"><h5 >12/04/2023</h5></div>
+                                        @if($cliente->cidade)
+                                            <span class="badge badge-primary">Cidade</span>
+                                            <h5 class="pt-2">{{$cliente->cidade}}</h5>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -123,28 +116,40 @@
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <div class="col-4 text-xs">
-                                        The most beautiful curves of this swivel stool
-                                        adds an elegant touch to any environment
+                                        {{$cliente->observacao}}
                                     </div>
                                 </div>
-
-
-
-                                {{-- <td class="py-3">
-                                    @if ($integrador->valor_total)
-                                        R$ {{ number_format($integrador->valor_total, 2, ',', '.') }}
-                                    @endif
-                                </td>
-                                <td class="py-3">
-                                    @if ($integrador->data_recente)
-                                        {{ date('d/m/Y', strtotime($integrador->data_recente)) }}
-                                    @endif
-                                </td> --}}
-
-
-
-                                
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100" style="padding-left:20px">
+                    <div class="card-header pb-0">
+                        <h6>Atendimentos Recentes</h6>
+                        <p class="text-sm">
+                            <i class="fa fa-arrow-down text-primary" aria-hidden="true"></i>
+                            <span class="font-weight-bold">5 </span> últimos antendimentos
+                        </p>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            @foreach($ultimosAtendimentos as $ultimoAtendimento )
+                                <div class="timeline-block mb-4">
+                                    <span class="timeline-step">
+                                        <i class="material-icons text-primary text-gradient">receipt_long</i>
+                                    </span>
+                                    <a href="{{route('view-atendimento', $ultimoAtendimento->id_atendimento)}}">
+                                        <div class="timeline-content">
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0">R$ {{ number_format($ultimoAtendimento->valor, 2, ',', '.') }} | {{$ultimoAtendimento->servico}}
+                                            </h6>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0"> {{$ultimoAtendimento->data}}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

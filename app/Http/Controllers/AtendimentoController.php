@@ -137,13 +137,14 @@ class AtendimentoController extends Controller
 
         try {
             $atendimento = Atendimento::find($atendimento);
-           
-            Carbon::setLocale('pt_BR');
-            $date = Carbon::parse($atendimento->data);
-            $atendimento->dataFormatada = $date->translatedFormat('F') . ': ' . $date->translatedFormat('l');
-            $atendimento->data = Carbon::parse($atendimento->data)->format('d/m/Y');
 
-            
+            if ($atendimento->data) {
+                Carbon::setLocale('pt_BR');
+                $date = Carbon::parse($atendimento->data);
+                $atendimento->dataFormatada = $date->translatedFormat('F') . ': ' . $date->translatedFormat('l');
+                $atendimento->data = Carbon::parse($atendimento->data)->format('d/m/Y');
+            }
+
             $servico = Servico::find($atendimento->servico);
 
             $cliente = Cliente::select(
@@ -157,9 +158,10 @@ class AtendimentoController extends Controller
                 ->where('cliente.id', $atendimento->id_cliente)
                 ->first();
 
-
-            $idade = (Carbon::createFromFormat('Y-m-d', $cliente->data_nascimento))->age;
-            $cliente->idade = $idade;
+            if ($cliente->data_nascimento) {
+                $idade = (Carbon::createFromFormat('Y-m-d', $cliente->data_nascimento))->age;
+                $cliente->idade = $idade;
+            }
 
             if ($atendimento->id_funcionario) {
                 $funcionario = Funcionario::select(
@@ -200,6 +202,7 @@ class AtendimentoController extends Controller
                 ]
             );
         } catch (Exception $ex) {
+            Log::error('Não foi possível achar o atendimento: ' . $ex->getMessage());
             return back()->with(['type' => 'alert-danger', 'message' => 'Não foi possível achar o atendimento.']);
         }
 

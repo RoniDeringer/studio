@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Terceirizado;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -92,10 +93,12 @@ class TerceirizadoController extends Controller
 
             $terceirizado->observacao = $request->observacao;
             $terceirizado->funcao = $request->funcao;
-            if (!$imagem = $this->formattingImage($request->file('foto'))) {
-                return redirect()->back()->with(['type' => 'alert-danger', 'message' => 'Erro ao cadastrar funcionáro! Imagem inválida.']);
+            if($request->file('foto')){
+                if (!$imagem = $this->formattingImage($request->file('foto'))) {
+                    return redirect()->back()->with(['type' => 'alert-danger', 'message' => 'Erro ao cadastrar terceirizado! Imagem inválida.']);
+                }
+                $terceirizado->foto = $imagem;
             }
-            $terceirizado->foto = $imagem;
 
             $user->nome = $request->nome;
             $user->telefone = str_replace(array("(", ")", " ", "-"), "", $request->telefone);
@@ -109,6 +112,16 @@ class TerceirizadoController extends Controller
         } catch (Exception $ex) {
             Log::error('Erro ao editar terceirizado: ' . $ex->getMessage());
             return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
+        }
+    }
+
+    public function destroy($id){
+        try {
+            $terceirizado = Terceirizado::findOrFail($id);
+            $terceirizado->delete();
+            return response()->json('Terceirizado excluído com sucesso', 200);
+        } catch (QueryException $ex) {
+            return response()->json($ex->getMessage(), 204);
         }
     }
 }

@@ -71,20 +71,20 @@
                                             <p class="text-sm font-weight-normal mb-0">{{$funcionario->total_atendimentos}}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="badge badge-success">
-                                                @if ($funcionario->rendimento)
+                                            @if ($funcionario->rendimento)
+                                                <span class="badge badge-success">
                                                         R$ {{ number_format($funcionario->rendimento, 2, ',', '.') }}
-                                                    @endif
-                                            </span>
+                                                </span>
+                                            @endif
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                            {{-- <a href="#" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                                 <i class="material-icons text-secondary position-relative text-lg">visibility</i>
-                                            </a>
+                                            </a> --}}
                                             <a href="{{route('editar-funcionario',$funcionario->id_funcionario)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                                 <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
                                             </a>
-                                            <a href="#"  data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                            <a href="#" onclick="modalDelete({{$funcionario->id_funcionario}})" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                                                 <i class="material-icons text-secondary position-relative text-lg">delete</i> 
                                             </a>
                                         </td>
@@ -121,18 +121,18 @@
     });
 
     // var form_rejeitar = document.getElementById('alert-delete');
-    function modalDelete(id) {
+    function modalDelete($id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-danger ms-3',
-                cancelButton: 'btn btn-secondary' // adiciona uma margem de 3px para a direita
+                cancelButton: 'btn btn-outline-secondary'
             },
             buttonsStyling: false
         })
 
         swalWithBootstrapButtons.fire({
             title: 'Deseja mesmo excluir?',
-            text: "Você excluirá todos os registros de atendimentos desse cliente!",
+            text: "Todos os atendimentos desse funcionario irão ficar com registros vazios",
             icon: 'error',
             showCancelButton: true,
             confirmButtonText: 'Excluir',
@@ -140,7 +140,34 @@
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "{{ route('cliente-destroy', ':id') }}".replace(':id', id);
+                const inputValor = result.value;
+                fetch('{{ route("funcionario-destroy", ":id") }}'.replace(':id', $id), {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Funcionario excluído!',
+                        })
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    }
+                    console.log('Erro na solicitação de excluír funcionario.')
+                })
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                    })
+                });
             }
         })
     }

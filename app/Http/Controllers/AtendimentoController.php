@@ -133,8 +133,6 @@ class AtendimentoController extends Controller
 
     public function view($atendimento)
     {
-
-
         try {
             $atendimento = Atendimento::find($atendimento);
 
@@ -205,14 +203,6 @@ class AtendimentoController extends Controller
             Log::error('Não foi possível achar o atendimento: ' . $ex->getMessage());
             return back()->with(['type' => 'alert-danger', 'message' => 'Não foi possível achar o atendimento.']);
         }
-
-        //cliente
-
-        //profissional
-
-        //atendimento / servico
-
-        // return view('pages.atendimento.view-atendimento');
     }
 
     public function edit($id_atendimento)

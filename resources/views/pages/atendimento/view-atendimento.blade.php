@@ -51,8 +51,10 @@
                                     <h6 class="mb-0">
                                         @if($funcionario)
                                             Funcionário
-                                        @else
+                                        @elseif($terceirizado)
                                             Terceirizado
+                                        @else
+                                            Profissional
                                         @endif
                                     </h6>
                                 </div>
@@ -67,8 +69,10 @@
                                 <h5 class="mb-0">
                                     @if($funcionario)
                                         {{$funcionario->cargo}}
-                                    @else
+                                    @elseif($terceirizado)
                                         {{$terceirizado->funcao}}
+                                    @else
+                                        registro deletado
                                     @endif
                                 </h5>
                                 </div>
@@ -79,8 +83,10 @@
                                 <h2 class="mb-0 text-primary">
                                     @if($funcionario)
                                         {{$funcionario->nome}}
-                                    @else
+                                    @elseif($terceirizado)
                                         {{$terceirizado->nome}}
+                                    @else
+                                        registro deletado
                                     @endif
                                 </h2>
                             </a>

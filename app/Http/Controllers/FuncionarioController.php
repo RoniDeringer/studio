@@ -8,6 +8,7 @@ use App\Models\Funcionario;
 use App\Models\Terceirizado;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -112,6 +113,16 @@ class FuncionarioController extends Controller
         } catch (Exception $ex) {
             Log::error('Erro ao editar funcionario: ' . $ex->getMessage());
             return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
+        }
+    }
+
+    public function destroy($id){
+        try {
+            $funcionario = Funcionario::findOrFail($id);
+            $funcionario->delete();
+            return response()->json('Funcionário excluído com sucesso', 200);
+        } catch (QueryException $ex) {
+            return response()->json($ex->getMessage(), 204);
         }
     }
 }

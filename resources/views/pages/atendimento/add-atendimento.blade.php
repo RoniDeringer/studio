@@ -36,21 +36,43 @@
                                         <div class="multisteps-form__content">
                                             <div class="row mt-3">
                                                 <div class="col-12 col-sm-6">
-                                                    <div class="input-group input-group-dynamic">
-                                                        <label class="form-label">Cliente</label>
-                                                        <select name="cliente_id" class="form-control" style="display: none" id="cliente_id">
-                                                            <option value="" selected disabled></option>
-                                                            @foreach ($data['clientes'] as $cliente)
-                                                                <option value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <input  name="cliente" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
-                                                        <datalist  class="form-control" name="choices-cliente" id="choices-cliente" style="display: none">
-                                                            @foreach ($data['clientes'] as $cliente)
-                                                                <option data-value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
-                                                            @endforeach
-                                                        </datalist>
-                                                    </div>
+                                                    @if($clienteSelected)
+                                                        <div class="input-group input-group-dynamic focused is-focused">
+                                                            <label class="form-label" for="cliente_id">Cliente</label>
+                                                            <select name="cliente_id" class="form-control" style="display: none" id="cliente_id">
+                                                                <option value=""  disabled></option>
+                                                                @foreach ($data['clientes'] as $cliente)
+                                                                    <option value="{{$cliente['id']}}" @if($clienteSelected->id == $cliente['id']) selected @endif>{{$clienteSelected->nome}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                                @foreach ($data['clientes'] as $cliente)
+                                                                    @if($clienteSelected->id == $cliente['id'])
+                                                                        <input value="{{$cliente['nome']}}" name="cliente" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
+                                                                    @endif
+                                                                @endforeach
+                                                            <datalist  class="form-control" name="choices-cliente" id="choices-cliente" style="display: none">
+                                                                @foreach ($data['clientes'] as $cliente)
+                                                                    <option data-value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
+                                                                @endforeach
+                                                            </datalist>
+                                                        </div>
+                                                    @else
+                                                        <div class="input-group input-group-dynamic">
+                                                            <label class="form-label">Cliente</label>
+                                                            <select name="cliente_id" class="form-control" style="display: none" id="cliente_id">
+                                                                <option value="" selected disabled></option>
+                                                                @foreach ($data['clientes'] as $cliente)
+                                                                    <option value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <input  name="cliente" autocomplete="new-password" required onfocus="focused(this)" onfocusout="defocused(this)" class="form-control" type="text" list="choices-cliente" id="clientes_datalist">
+                                                            <datalist  class="form-control" name="choices-cliente" id="choices-cliente" style="display: none">
+                                                                @foreach ($data['clientes'] as $cliente)
+                                                                    <option data-value="{{$cliente['id']}}">{{$cliente['nome']}}</option>
+                                                                @endforeach
+                                                            </datalist>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                     <div class="input-group input-group-dynamic">

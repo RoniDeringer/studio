@@ -48,7 +48,7 @@ class TerceirizadoController extends Controller
 
     public function addTerceirizado()
     {
-        return view('pages.add-terceirizado', ['cidades' => self::CIDADES]);
+        return view('pages.terceirizado.add-terceirizado', ['cidades' => self::CIDADES]);
     }
 
     public function store(Request $request)

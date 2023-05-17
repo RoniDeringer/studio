@@ -26,6 +26,7 @@ class AtendimentoController extends Controller
             'user_terc.nome as nome_terc',
             'atendimento.data as data_atendimento',
             'atendimento.valor as valor',
+            'atendimento.observacao',
             'servico.nome as servico',
         )
             ->join('cliente AS cli', 'cli.id', 'atendimento.id_cliente')
@@ -45,11 +46,13 @@ class AtendimentoController extends Controller
 
         $atendimentos = Atendimento::select(
             'atendimento.id',
+            'cli.id AS cli_id',
             'user_cli.nome as nome_cli',
             'user_func.nome as nome_func',
             'user_terc.nome as nome_terc',
             'atendimento.data as data_atendimento',
             'atendimento.valor as valor',
+            'atendimento.observacao',
             'servico.nome as servico',
         )
             ->join('cliente AS cli', 'cli.id', 'atendimento.id_cliente')
@@ -66,7 +69,7 @@ class AtendimentoController extends Controller
         return view('pages.atendimento.atendimentos', ['atendimentos' => $atendimentos]);
     }
 
-    public function addAtendimento()
+    public function addAtendimento($cliente = null)
     {
         $funcionarios = Funcionario::select(
             'funcionario.id_user AS id_user',
@@ -98,7 +101,9 @@ class AtendimentoController extends Controller
             'servicos' => $servicos->toArray(),
         ];
 
-        return view('pages.atendimento.add-atendimento', ['data' => $data]);
+        $clienteSelected = Cliente::find($cliente);
+
+        return view('pages.atendimento.add-atendimento', ['data' => $data, 'clienteSelected' => $clienteSelected]);
     }
 
     public function store(Request $request)

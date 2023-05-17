@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex justify-content-end">
-                                    <a href="{{route('add-atendimento')}}">
+                                    <a href="{{route('add-atendimento', $atendimentos[0]->cli_id)}}">
                                         <button class="btn btn-icon btn-3 btn-primary" type="button">
                                             <span class="btn-inner--icon"><i class="material-icons">add</i></span>
                                           <span class="btn-inner--text">Atendimento</span>
@@ -75,11 +75,18 @@
                                                                                 {{ date('d/m/Y', strtotime($atendimento->data_atendimento)) }}
                                                                             </h5>
                                                                         </div>
-                                                                        <div class="col-md-3 text-dark">
+                                                                        <div class="col-md-2 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-7">Serviço</h6>
                                                                             <h5 class="text-md text-bold opacity-9">{{ $atendimento->servico}}</h5>
                                                                         </div>
                                                                         
+                                                                        <div class="col-md-3 text-dark">
+                                                                            <h6 class="text-xs mb-1 opacity-7">Observação</h6>
+                                                                            <h5 class="text-md text-bold  opacity-9">
+                                                                               {{$atendimento->observacao}}
+                                                                            </h5>
+                                                                        </div>
+
                                                                         <div class="col-md-2 text-dark">
                                                                             <h6 class="text-xs mb-1 opacity-7">Valor</h6>
                                                                             <h5 class="text-md text-bold  opacity-9">
@@ -102,7 +109,6 @@
                                                                                 @endif
                                                                             </h5>
                                                                         </div>
-                                                                        <div class="col-2"></div>
                                                                         <div class="col-md-1 d-flex justify-content-between">
                                                                             {{-- <h6 class="text-xs mb-1 opacity-7">Ações</h6> --}}
                                                                             <a href="{{route('view-atendimento',$atendimento->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Preview product">

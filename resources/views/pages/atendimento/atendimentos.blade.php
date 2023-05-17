@@ -72,7 +72,7 @@
                                                                         <div class="col-md-2">
                                                                             <h6 class="text-xs mb-1 opacity-7">Data</h6>
                                                                             <h5 class="text-md text-bold opacity-9">
-                                                                                {{ date('d/m/Y', strtotime($atendimento->data_atendimento)) }}
+                                                                                {{ date('d/m/Y', strtotime($atendimento->data)) }}
                                                                             </h5>
                                                                         </div>
                                                                         <div class="col-md-2 text-dark">

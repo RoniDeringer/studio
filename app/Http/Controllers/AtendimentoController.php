@@ -50,7 +50,7 @@ class AtendimentoController extends Controller
             'user_cli.nome as nome_cli',
             'user_func.nome as nome_func',
             'user_terc.nome as nome_terc',
-            'atendimento.data as data_atendimento',
+            'atendimento.data',
             'atendimento.valor as valor',
             'atendimento.observacao',
             'servico.nome as servico',
@@ -63,8 +63,8 @@ class AtendimentoController extends Controller
             ->leftJoin('users AS user_terc', 'terc.id_user', 'user_terc.id')
             ->leftJoin('servico', 'servico.id', 'atendimento.servico')
             ->where('user_cli.id', $user)
+            ->orderBy('atendimento.data', 'desc')
             ->get();
-
 
         return view('pages.atendimento.atendimentos', ['atendimentos' => $atendimentos]);
     }
@@ -129,7 +129,7 @@ class AtendimentoController extends Controller
             $atendimento->save();
             $cliente->save();
 
-            return redirect()->route('atendimentos')->with(['type' => 'alert-success', 'message' => 'Atendimento cadastrado com sucesso!']);
+            return redirect()->route('atendimentos-cliente', $cliente->id_user)->with(['type' => 'alert-success', 'message' => 'Atendimento cadastrado com sucesso!']);
         } catch (Exception $ex) {
             Log::error('Erro ao criar atendimento: ' . $ex->getMessage());
             return back()->with(['type' => 'alert-danger', 'message' => 'Erro! Tente novamente mais tarde.']);
